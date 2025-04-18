@@ -1,9 +1,9 @@
 import React from 'react'
-import Navbar from '@/Components/Navbar'
-import TravelCards from "@/Components/TravelCards"
-import Cards from "@/Components/Cards"
-import ImageSlider from "@/Components/ImageSlider"
-import Footer from "@/Components/Footer"
+import Navbar from '@/components/Navbar'
+import TravelCards from "@/components/TravelCards"
+import Cards from "@/components/Cards"
+import ImageSlider from "@/components/ImageSlider"
+import Footer from "@/components/Footer"
 
 const destinations = [
     {
