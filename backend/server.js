@@ -6,18 +6,19 @@ const axios = require('axios');
 const cors = require('cors');
 const WebSocket = require('ws');
 const http = require('http');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Replace these with your actual credentials
-const MERCHANT_ID = 'YOUR_MERCHANT_ID';
-const SALT_KEY = 'YOUR_SALT_KEY';
-const SALT_INDEX = 'YOUR_SALT_INDEX';
-const PHONEPE_HOST = 'https://api.phonepe.com/apis/hermes/pg/v1';
+const MERCHANT_ID = process.env.YOUR_MERCHANT_ID;
+const SALT_KEY = process.env.YOUR_SALT_KEY;
+const SALT_INDEX = process.env.YOUR_SALT_INDEX;
+const PHONEPE_HOST = process.env.PHONEPE_HOST;
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: [process.env.FRONTEND_URL],
   methods: ['GET', 'POST'],
   credentials: true,
 }));

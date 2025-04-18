@@ -34,7 +34,7 @@ const AudienceRoom = () => {
   };
 
   const connectWebSocket = () => {
-    const websocket = new WebSocket('ws://localhost:5000/ws');
+    const websocket = new WebSocket(process.env.NEXT_PUBLIC_API_URL);
     websocket.onopen = () => {
       setIsConnected(true);
       setWs(websocket);
@@ -88,8 +88,8 @@ const AudienceRoom = () => {
   useEffect(() => {
     if (!id || !meetingRef.current) return;
 
-    const appId = 582616356;
-    const serverSecret = 'fdd4f736ae9f1c763e03b15dae0396e5';
+    const appId = process.env.NEXT_PUBLIC_API_ID;
+    const serverSecret = process.env.SECRET_KEY;
     const userID = randomID();
     const userName = `Audience_${userID}`;
 
