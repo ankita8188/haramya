@@ -1,12 +1,12 @@
 
 import React from 'react'
-import ImageSlider from "@/Components/ImageSlider"
-import Carousel from "@/Components/Carousel"
-import Bharat from "@/Components/Bharat"
-import Currency from "@/Components/Currency"
+import ImageSlider from "@/components/ImageSlider"
+import Carousel from "@/components/Carousel"
+import Bharat from "@/components/Bharat"
+import Currency from "@/components/Currency"
 
-import Hero from "@/Components/Hero"
-import Footer from "@/Components/Footer"
+import Hero from "@/components/Hero"
+import Footer from "@/components/Footer"
 const page = () => {
   return (
     <div className='bg-black'>
