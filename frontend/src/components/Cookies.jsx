@@ -27,22 +27,22 @@ const CookiePopup = () => {
       left: '50%',
       transform: 'translate(-50%, -50%)',
       backgroundColor: 'white',
-      padding: '10px 10px',
+      padding: '16px',
       borderRadius: '12px',
       boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)',
       zIndex: 9999,
-      maxWidth: '600px',
-      width: '90%',
+      maxWidth: '90%',
+      width: '320px',
       color: '#000',
       display: 'flex',
       flexDirection: 'column',
-      gap: '20px',
+      gap: '16px',
     }}>
       {/* Close Button */}
       <button onClick={handleClose} style={{
         position: 'absolute',
-        top: '10px',
-        right: '15px',
+        top: '8px',
+        right: '12px',
         fontSize: '20px',
         border: 'none',
         background: 'none',
@@ -51,7 +51,7 @@ const CookiePopup = () => {
       }}>×</button>
 
       {/* Message */}
-      <p style={{ margin: 0, fontSize: '16px' }}>
+      <p style={{ margin: 0, fontSize: '14px', lineHeight: '1.5' }}>
         This site uses cookies to understand how you use our website and to improve your experience.
         By continuing to use our website, you accept our use of cookies.
       </p>
@@ -62,10 +62,11 @@ const CookiePopup = () => {
         backgroundColor: '#B0006D',
         color: 'white',
         border: 'none',
-        padding: '5px 20px',
+        padding: '8px 16px',
         borderRadius: '8px',
         cursor: 'pointer',
-        fontWeight: '300',
+        fontWeight: '500',
+        fontSize: '14px',
       }}>
         ACCEPT
       </button>

@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState } from 'react';
 
@@ -32,35 +31,32 @@ const BharatCarousel = () => {
   const { title, heading, content, image } = slides[currentIndex];
 
   return (
-    <div className="bg-black text-white w-[95rem] h-[30rem]  shadow-lg">
-      
-      <div className="flex flex-col md:flex-row items-center gap-4">
-        {/* Left Side */}
-        
-
+    <div className="bg-black text-white w-full max-w-[95rem] mx-auto p-4 sm:p-6 shadow-lg">
+      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         {/* Right Side */}
-        <div className="w-3/4">
-          <h2 className="text-xl font-semibold mt-8 text-[25px] ml-6">{heading}</h2>
-          <p className="text-sm leading-relaxed text-[20px] ml-6">{content}</p>
-       
+        <div className="w-full md:w-3/4">
+          <h2 className="text-xl sm:text-2xl font-semibold mt-4 sm:mt-8 text-[20px] sm:text-[25px] ml-4 sm:ml-6">{heading}</h2>
+          <p className="text-sm sm:text-base leading-relaxed text-[16px] sm:text-[20px] ml-4 sm:ml-6">{content}</p>
 
-        <div className=" justify-end mt-6">
-        <button
-          onClick={nextSlide}
-          className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full ml-[50rem]"
-        >
-          →
-        </button>
-      </div>
-      </div>
-        <div className="md:w-1/2 text-center">
-          <h2 className="text-xl font-semibold mr-[4rem] mb-[3rem] text-[22px]">{title}</h2>
-          <img src={image} alt={title} width={400} height={350} className="rounded-xl shadow-md ml-[4rem]" />
+          <div className="flex justify-end mt-4 sm:mt-6">
+            <button
+              onClick={nextSlide}
+              className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full ml-4 sm:ml-8"
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full md:w-1/2 text-center">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-[18px] sm:text-[22px]">{title}</h2>
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full max-w-[400px] h-auto rounded-xl shadow-md mx-auto" 
+          />
         </div>
       </div>
-
-      {/* Right Arrow Only */}
-      
     </div>
   );
 };

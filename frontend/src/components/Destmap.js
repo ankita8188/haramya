@@ -104,21 +104,21 @@ export default function Destmap() {
     })}
   >
 <Popup maxWidth={570}>
-<div className="w-[550px] p-6 rounded-xl shadow-xl bg-white flex flex-col items-center space-y-4">
+<div className="w-full max-w-[550px] p-4 sm:p-6 rounded-xl shadow-xl bg-white flex flex-col items-center space-y-4">
   {/* Image + Text (Row) */}
-  <div className="flex space-x-6">
+  <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 w-full">
     <img
       src={loc.image}
       alt="location"
-      className="w-64 h-[200px] object-cover rounded-lg"
+      className="w-full sm:w-64 h-[200px] object-cover rounded-lg"
     />
     <div className="flex items-center">
-      <p className="text-2xl font-semibold">{loc.text}</p>
+      <p className="text-xl sm:text-2xl font-semibold">{loc.text}</p>
     </div>
   </div>
 
   {/* Button Centered Below */}
-  <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-base rounded-lg shadow-md">
+  <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-lg shadow-md">
     Explore
   </button>
 </div>

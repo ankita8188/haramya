@@ -53,35 +53,35 @@ export default function BestDestinations() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-10">
-      <h1 className="text-3xl font-bold text-center mb-2">Best Destinations</h1>
-      <p className="text-center text-gray-400 mb-10">
-        Explore the amazing journeys shared by travelers.<br></br> The best amazing places to see during a season of joy.
+    <div className="min-h-screen bg-black text-white px-4 sm:px-6 py-6 sm:py-10">
+      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">Best Destinations</h1>
+      <p className="text-center text-gray-400 mb-6 sm:mb-10 text-sm sm:text-base">
+        Explore the amazing journeys shared by travelers.<br className="hidden sm:block" /> The best amazing places to see during a season of joy.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[10rem] gap-6">
-                {destinations.map((dest, idx) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[8rem] sm:auto-rows-[10rem] gap-4 sm:gap-6">
+        {destinations.map((dest, idx) => (
           <div
             key={idx}
-            className={`rounded-2xl overflow-hidden relative bg-cover bg-center ${dest.rowSpan || "row-span-2"}`}      
+            className={`rounded-xl sm:rounded-2xl overflow-hidden relative bg-cover bg-center ${dest.rowSpan || "row-span-2"}`}      
             style={{ backgroundImage: `url(${dest.img})` }}
           >
-            <div className="absolute inset-0 bg-black/40 p-4 flex flex-col justify-between">
+            <div className="absolute inset-0 bg-black/40 p-3 sm:p-4 flex flex-col justify-between">
               <div>
-                <h2 className="text-3xl font-bold capitalize leading-snug">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold capitalize leading-snug">
                   {dest.title}
                 </h2>
-                <p className="text-lg text-gray-300">{dest.subtitle}</p>
+                <p className="text-base sm:text-lg text-gray-300">{dest.subtitle}</p>
               </div>
               <div className="flex items-center gap-2">
                 <Image
                   src={dest.profile}
-                  width={60}
-                  height={60}
+                  width={40}
+                  height={40}
                   alt="author"
-                  className="rounded-full border-2 border-white"
+                  className="rounded-full border-2 border-white w-10 h-10 sm:w-[60px] sm:h-[60px]"
                 />
-                <span className="text-md">Start by <strong>{dest.author}</strong></span>
+                <span className="text-sm sm:text-md">Start by <strong>{dest.author}</strong></span>
               </div>
             </div>
           </div>

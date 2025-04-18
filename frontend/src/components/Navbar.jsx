@@ -184,7 +184,7 @@ const [plannerSubMenuOpen, setPlannerSubMenuOpen] = useState(false);
             )}
           </div>
 
-          <Link href="/destinations" className="hover:underline text-xl">
+          <Link href="/destination" className="hover:underline text-xl">
             Destinations
           </Link>
           <Link href="/about" className="hover:underline text-xl">
