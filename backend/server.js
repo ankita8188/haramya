@@ -25,6 +25,11 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.send('Backend is running 🚀');
+});
+
+
 // Payment initiation endpoint
 app.post('/api/payment', async (req, res) => {
   const { amount, mobileNumber, email } = req.body;
