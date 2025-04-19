@@ -90,7 +90,7 @@ const HostRoom = () => {
     if (!id || !meetingRef.current) return;
 console.log( process.env.NEXT_PUBLIC_API_ID)
 console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
-    const appId = process.env.NEXT_PUBLIC_API_ID;
+    const appId =parseInt(process.env.NEXT_PUBLIC_API_ID);
     const serverSecret = process.env.NEXT_PUBLIC_SECRET_KEY;
     const userID = randomID();
     const userName = `Host_${userID}`;
