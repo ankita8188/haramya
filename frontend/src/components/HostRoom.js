@@ -14,7 +14,6 @@ const HostRoom = () => {
   const [ws, setWs] = useState(null);
   const wsRef = useRef(null);
 
-
   const speakMessage = (message) => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
@@ -25,7 +24,8 @@ const HostRoom = () => {
       window.speechSynthesis.speak(utterance);
     }
   };
-  const connectWebSocket = (isLive= false) => {
+
+  const connectWebSocket = (isLive = false) => {
     console.log(process.env.NEXT_PUBLIC_API_ID)
     const websocket = new WebSocket(`wss${process.env.NEXT_PUBLIC_API_URL}/ws`);
     websocket.onopen = () => {
@@ -55,19 +55,17 @@ const HostRoom = () => {
 
           if (data.roomId !== id) {
             console.warn('Room ID mismatch. Host is live in another room.');
-              setShouldConnect(false);
-              setShowWaitingMessage(true);
-              setRoomMismatch(true);
-            
+            setShouldConnect(false);
+            setShowWaitingMessage(true);
+            setRoomMismatch(true);
             return;
           }
 
           setRoomMismatch(false);
           setIsHostLive(data.isLive);
 
-            setShouldConnect(data.isLive);
-            setShowWaitingMessage(!data.isLive);
-          
+          setShouldConnect(data.isLive);
+          setShowWaitingMessage(!data.isLive);
         }
       } catch (error) {
         console.error('Error parsing message:', error);
@@ -89,9 +87,10 @@ const HostRoom = () => {
 
   useEffect(() => {
     if (!id || !meetingRef.current) return;
-console.log( process.env.NEXT_PUBLIC_API_ID)
-console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
-    const appId =parseInt(process.env.NEXT_PUBLIC_API_ID);
+
+    console.log(process.env.NEXT_PUBLIC_API_ID)
+    console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
+    const appId = parseInt(process.env.NEXT_PUBLIC_API_ID);
     const serverSecret = process.env.NEXT_PUBLIC_SECRET_KEY;
     const userID = randomID();
     const userName = `Host_${userID}`;
@@ -101,7 +100,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-  
+
     zp.joinRoom({
       container: meetingRef.current,
       useFrontFacingCamera: false,
@@ -124,7 +123,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
       onLiveEnd: () => {
         console.log("live ended")
         setIsHostLive(false);
-        console.log(ws+" "+WebSocket.OPEN)
+        console.log(ws + " " + WebSocket.OPEN)
         if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
           wsRef.current.send(JSON.stringify({
             type: 'live_status',
@@ -136,25 +135,27 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
       },
     });
 
-    const videoElement = meetingRef.current.querySelector('video');
-    console.log(videoElement)
-    if (videoElement) {
-      videoElement.classList.add('mirror-video'); // Apply mirror effect
-    }
-  }, [id]);
+    // Wait for a second before checking elements (or use MutationObserver)
+    setTimeout(() => {
+      const videoElement = meetingRef.current.querySelector('video');
+      console.log(videoElement);
+      if (videoElement) {
+        videoElement.classList.add('mirror-video'); // Apply mirror effect
+      }
+      
+      // Check for other elements
+      if (meetingRef.current) {
+        const elements = meetingRef.current.querySelectorAll("*");
+        console.log("Child elements count:", elements.length);
+        elements.forEach((el, index) => {
+          console.log(`Element ${index + 1}:`, el);
+        });
+      } else {
+        console.warn("meetingRef is not attached yet!");
+      }
+    }, 1000);  // Wait 1 second to ensure elements are rendered
 
-  useEffect(() => {
-    if (meetingRef.current) {
-      const elements = meetingRef.current.querySelectorAll("*");
-      console.log("Child elements count:", elements.length);
-      elements.forEach((el, index) => {
-        console.log(`Element ${index + 1}:`, el);
-      });
-    } else {
-      console.warn("meetingRef is not attached yet!");
-    }
-  }, []);
-  
+  }, [id]);
 
   return <div ref={meetingRef} style={{ width: '100vw', height: '100vh' }} />;
 };
