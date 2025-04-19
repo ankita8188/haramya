@@ -26,7 +26,7 @@ const HostRoom = () => {
     }
   };
   const connectWebSocket = (isLive= false) => {
-    const websocket = new WebSocket(`ws://${NEXT_PUBLIC_API_URL}/ws`);
+    const websocket = new WebSocket(`wss://${process.env.NEXT_PUBLIC_API_URL}/ws`);
     websocket.onopen = () => {
       console.log('WebSocket connected');
       console.log(websocket)
