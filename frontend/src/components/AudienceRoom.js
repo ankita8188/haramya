@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import { ZegoExpressEngine } from '@zegocloud/zego-express-engine';
 import { randomID } from './Zegoshared';
 
 const AudienceRoom = () => {
@@ -27,10 +27,9 @@ const AudienceRoom = () => {
 
   const disconnectWebSocket = () => {
     if (ws) {
-      setWs(null)
-
+      setWs(null);
     }
-    router.push("/")
+    router.push('/');
   };
 
   const connectWebSocket = () => {
@@ -51,29 +50,22 @@ const AudienceRoom = () => {
 
         if (data.type === 'system') {
           console.log('System message:', data.message);
-        }  else if (data.type === 'live_status') {
+        } else if (data.type === 'live_status') {
           console.log('Live status received:', data.isLive);
-          if(!data.isLive){
-            console.log("ended")
-            disconnectWebSocket()
-        
+          if (!data.isLive) {
+            console.log('Live stream ended');
+            disconnectWebSocket();
             return;
           }
           if (data.roomId !== id) {
             console.warn('Room ID mismatch. Host is live in another room.');
-              setShouldConnect(false);
-              setShowWaitingMessage(true);
-              setRoomMismatch(true);
-            
+            setRoomMismatch(true);
+            setShouldConnect(false);
             return;
           }
 
           setRoomMismatch(false);
-          setIsHostLive(data.isLive);
-
-            setShouldConnect(data.isLive);
-            setShowWaitingMessage(!data.isLive);
-          
+          setShouldConnect(data.isLive);
         }
       } catch (error) {
         console.error('Error parsing message:', error);
@@ -81,9 +73,6 @@ const AudienceRoom = () => {
     };
     websocket.onclose = () => setIsConnected(false);
   };
-
-
-  
 
   useEffect(() => {
     if (!id || !meetingRef.current) return;
@@ -93,27 +82,52 @@ const AudienceRoom = () => {
     const userID = randomID();
     const userName = `Audience_${userID}`;
 
-    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
-      appId, serverSecret, String(id), userID, userName
+    // Generate the kit token for audience
+    const kitToken = ZegoExpressEngine.generateKitTokenForTest(
+      appId,
+      serverSecret,
+      String(id),
+      userID,
+      userName
     );
 
-    const zp = ZegoUIKitPrebuilt.create(kitToken);
+    // Initialize the Zego Express Engine
+    const engine = new ZegoExpressEngine(appId, serverSecret);
+    
+    // Create the Zego room and join as audience
+    engine.login(id, kitToken).then(() => {
+      console.log('Successfully logged in to the room.');
+      engine.createRoom({
+        container: meetingRef.current,
+        scenario: ZegoExpressEngine.Scenario.LiveStreaming,
+        config: {
+          role: ZegoExpressEngine.Role.Audience,
+        },
+      });
 
-    zp.joinRoom({
-      container: meetingRef.current,
-      scenario: {
-        mode: ZegoUIKitPrebuilt.LiveStreaming,
-        config: { role: ZegoUIKitPrebuilt.Audience },
-      },
+      // Set camera configurations to disable mirroring on back camera
+      const cameraConfig = {
+        camera: {
+          mirror: false, // Disable mirroring for the back camera
+          device: 'back', // Specify back camera device if necessary
+        }
+      };
+      engine.setVideoConfig(cameraConfig);
+
+      connectWebSocket();
+    }).catch((error) => {
+      console.error('Error logging in to the room:', error);
     });
-    connectWebSocket()
 
+    return () => {
+      engine.logout();
+    };
   }, [id]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#000' }}>
       <div ref={meetingRef} style={{ width: '100%', height: '90%' }} />
-      
+
       {roomMismatch && (
         <div style={{
           position: 'absolute',
