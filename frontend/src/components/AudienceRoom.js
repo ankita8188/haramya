@@ -34,7 +34,7 @@ const AudienceRoom = () => {
   };
 
   const connectWebSocket = () => {
-    const websocket = new WebSocket(`ws://${NEXT_PUBLIC_API_URL}/ws`);
+    const websocket = new WebSocket(`ws://${process.env.NEXT_PUBLIC_API_URL}/ws`);
     websocket.onopen = () => {
       setIsConnected(true);
       setWs(websocket);
