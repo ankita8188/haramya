@@ -91,3 +91,8 @@ body {
 .imperial {
   font-family: var(--font-imperial-script);
 }
+
+.mirror-video {
+  transform: scaleX(-1); /* Flip the video horizontally */
+}
+
