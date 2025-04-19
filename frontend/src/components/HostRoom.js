@@ -101,6 +101,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
+    zp.setVideoMirrorMode(ZegoUIKitPrebuilt.VideoMirrorMode.OnlyFrontCamera);
 
     zp.joinRoom({
       container: meetingRef.current,
@@ -111,7 +112,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
       sharedLinks: [
         {
           name: 'Copy Audience Link',
-          url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/room/${id}`,
+          url: `https${process.env.NEXT_PUBLIC_FRONTEND_URL}/room/${id}`,
         },
       ],
       onLiveStart: () => {
