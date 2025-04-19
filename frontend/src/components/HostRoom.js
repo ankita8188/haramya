@@ -101,12 +101,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-    if (meetingRef.current) {
-      const allElements = meetingRef.current.querySelectorAll("*");
-      allElements.forEach((el, index) => {
-        console.log(`Element ${index + 1}:`, el);
-      });
-    }
+  
     zp.joinRoom({
       container: meetingRef.current,
       useFrontFacingCamera: false,
@@ -147,6 +142,19 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
       videoElement.classList.add('mirror-video'); // Apply mirror effect
     }
   }, [id]);
+
+  useEffect(() => {
+    if (meetingRef.current) {
+      const elements = meetingRef.current.querySelectorAll("*");
+      console.log("Child elements count:", elements.length);
+      elements.forEach((el, index) => {
+        console.log(`Element ${index + 1}:`, el);
+      });
+    } else {
+      console.warn("meetingRef is not attached yet!");
+    }
+  }, []);
+  
 
   return <div ref={meetingRef} style={{ width: '100vw', height: '100vh' }} />;
 };
