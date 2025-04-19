@@ -101,9 +101,6 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-    console.log(ZegoUIKitPrebuilt.VideoMirrorMode)
-    zp.setVideoMirrorMode(ZegoUIKitPrebuilt.VideoMirrorMode.OnlyFrontCamera);
-
     zp.joinRoom({
       container: meetingRef.current,
       scenario: {
