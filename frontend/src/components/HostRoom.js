@@ -26,10 +26,13 @@ const HostRoom = () => {
   };
 
   const connectWebSocket = (isLive = false) => {
+    console.log(process.env.NEXT_PUBLIC_API_ID)
     const websocket = new WebSocket(`wss${process.env.NEXT_PUBLIC_API_URL}/ws`);
     websocket.onopen = () => {
       console.log('WebSocket connected');
+      console.log(websocket)
       wsRef.current = websocket;
+      console.log(isHostLive)
       if (isLive) {
         websocket.send(JSON.stringify({
           type: 'live_status',
@@ -38,22 +41,36 @@ const HostRoom = () => {
         }));
       }
     };
-
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.type === 'live_status') {
+        console.log('Received message:', data);
+
+        if (data.type === 'system') {
+          console.log('System message:', data.message);
+        } else if (data.type === 'control') {
+          speakMessage(data.command);
+        } else if (data.type === 'live_status') {
+          console.log('Live status received:', data.isLive);
+
           if (data.roomId !== id) {
-            setIsHostLive(false);
+            console.warn('Room ID mismatch. Host is live in another room.');
+            setShouldConnect(false);
+            setShowWaitingMessage(true);
+            setRoomMismatch(true);
             return;
           }
+
+          setRoomMismatch(false);
           setIsHostLive(data.isLive);
+
+          setShouldConnect(data.isLive);
+          setShowWaitingMessage(!data.isLive);
         }
       } catch (error) {
         console.error('Error parsing message:', error);
       }
     };
-
     websocket.onclose = () => {
       console.log('WebSocket disconnected');
       wsRef.current = null;
@@ -71,6 +88,8 @@ const HostRoom = () => {
   useEffect(() => {
     if (!id || !meetingRef.current) return;
 
+    console.log(process.env.NEXT_PUBLIC_API_ID)
+    console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     const appId = parseInt(process.env.NEXT_PUBLIC_API_ID);
     const serverSecret = process.env.NEXT_PUBLIC_SECRET_KEY;
     const userID = randomID();
@@ -84,19 +103,27 @@ const HostRoom = () => {
 
     zp.joinRoom({
       container: meetingRef.current,
-      useFrontFacingCamera: false,  // Set this if you need the back camera
+      useFrontFacingCamera: false,
       scenario: {
         mode: ZegoUIKitPrebuilt.LiveStreaming,
         config: { role: ZegoUIKitPrebuilt.Host },
       },
+      sharedLinks: [
+        {
+          name: 'Copy Audience Link',
+          url: `https${process.env.NEXT_PUBLIC_FRONTEND_URL}/room/${id}`,
+        },
+      ],
       onLiveStart: () => {
-        console.log("Live started");
+        console.log("live started")
         setIsHostLive(true);
+        console.log(isHostLive)
         connectWebSocket(true);
       },
       onLiveEnd: () => {
-        console.log("Live ended");
+        console.log("live ended")
         setIsHostLive(false);
+        console.log(ws + " " + WebSocket.OPEN)
         if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
           wsRef.current.send(JSON.stringify({
             type: 'live_status',
@@ -108,13 +135,25 @@ const HostRoom = () => {
       },
     });
 
-    // Apply the mirror mode for the video
-    const videoElement = meetingRef.current.querySelector('video');
-    if (videoElement) {
-      const zegoEngine = zp.getEngine();
-      zegoEngine.setVideoMirrorMode(ZegoUIKitPrebuilt.ZegoVideoMirrorModeNoMirror); // Disable mirror effect
-      console.log("Mirror mode set to NoMirror");
-    }
+    // Wait for a second before checking elements (or use MutationObserver)
+    setTimeout(() => {
+      const videoElement = meetingRef.current.querySelector('video');
+      console.log(videoElement);
+      if (videoElement) {
+        videoElement.classList.add('mirror-video'); // Apply mirror effect
+      }
+      
+      // Check for other elements
+      if (meetingRef.current) {
+        const elements = meetingRef.current.querySelectorAll("*");
+        console.log("Child elements count:", elements.length);
+        elements.forEach((el, index) => {
+          console.log(`Element ${index + 1}:`, el);
+        });
+      } else {
+        console.warn("meetingRef is not attached yet!");
+      }
+    }, 1000);  // Wait 1 second to ensure elements are rendered
 
   }, [id]);
 
