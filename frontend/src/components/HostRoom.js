@@ -105,7 +105,13 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
       container: meetingRef.current,
       scenario: {
         mode: ZegoUIKitPrebuilt.LiveStreaming,
-        config: { role: ZegoUIKitPrebuilt.Host },
+        config: {
+           role: ZegoUIKitPrebuilt.Host,
+           cameraConfig: {
+            facingMode: 'environment',
+            mirror: false
+          }
+           },
       },
       sharedLinks: [
         {
