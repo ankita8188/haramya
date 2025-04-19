@@ -91,7 +91,7 @@ const HostRoom = () => {
 console.log( process.env.NEXT_PUBLIC_API_ID)
 console.log(process.env.SECRET_KEY)
     const appId = process.env.NEXT_PUBLIC_API_ID;
-    const serverSecret = process.env.SECRET_KEY;
+    const serverSecret = process.env.NEXT_PUBLIC_SECRET_KEY;
     const userID = randomID();
     const userName = `Host_${userID}`;
 
