@@ -137,6 +137,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     });
 
     const videoElement = meetingRef.current.querySelector('video');
+    console.log(videoElement)
     if (videoElement) {
       videoElement.classList.add('mirror-video'); // Apply mirror effect
     }
