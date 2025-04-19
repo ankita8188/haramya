@@ -13,7 +13,8 @@ const HostRoom = () => {
   const [isHostLive, setIsHostLive] = useState(false);
   const [ws, setWs] = useState(null);
   const wsRef = useRef(null);
-
+  const [isBackCamera, setIsBackCamera] = useState(true);
+  const [zegoInstance, setZegoInstance] = useState(null);
 
   const speakMessage = (message) => {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
@@ -87,6 +88,30 @@ const HostRoom = () => {
     }
   };
 
+  const toggleCamera = async () => {
+    if (zegoInstance) {
+      try {
+        // Toggle camera facing mode
+        const newFacingMode = isBackCamera ? 'user' : 'environment';
+        await zegoInstance.toggleCamera(newFacingMode);
+        setIsBackCamera(!isBackCamera);
+        
+        // Apply CSS transform to fix mirroring for back camera
+        const videoElements = document.querySelectorAll('.zego-video-container video');
+        videoElements.forEach(video => {
+          if (newFacingMode === 'environment') {
+            video.style.transform = 'scaleX(-1)'; // Flip horizontally for back camera
+          } else {
+            video.style.transform = 'scaleX(1)'; // Normal for front camera
+          }
+        });
+      } catch (error) {
+        console.error('Error toggling camera:', error);
+      }
+    }
+  };
+
+
   useEffect(() => {
     if (!id || !meetingRef.current) return;
 console.log( process.env.NEXT_PUBLIC_API_ID)
@@ -101,6 +126,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
+    setZegoInstance(zp);
     zp.joinRoom({
       container: meetingRef.current,
       scenario: {
@@ -124,6 +150,13 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
         setIsHostLive(true);
         console.log(isHostLive)
         connectWebSocket(true);
+
+        setTimeout(() => {
+          const videoElements = document.querySelectorAll('.zego-video-container video');
+          videoElements.forEach(video => {
+            video.style.transform = 'scaleX(-1)'; // Flip horizontally for back camera
+          });
+        }, 1000);
       },
       onLiveEnd: () => {
         console.log("live ended")
@@ -141,7 +174,18 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     });
   }, [id]);
 
-  return <div ref={meetingRef} style={{ width: '100vw', height: '100vh' }} />;
+  return(
+    <div className="relative">
+    <div ref={meetingRef} style={{ width: '100vw', height: '100vh' }} />
+    <button 
+      onClick={toggleCamera}
+      className="absolute bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md z-50"
+    >
+      {isBackCamera ? 'Switch to Front Camera' : 'Switch to Back Camera'}
+    </button>
+  </div>
+  );
+
 };
 
 export default HostRoom;
