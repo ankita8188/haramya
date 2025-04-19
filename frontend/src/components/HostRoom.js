@@ -153,7 +153,7 @@ const HostRoom = () => {
       } else {
         console.warn("meetingRef is not attached yet!");
       }
-    }, 1000);  // Wait 1 second to ensure elements are rendered
+    }, 4000);  // Wait 1 second to ensure elements are rendered
 
   }, [id]);
 
