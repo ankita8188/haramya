@@ -137,7 +137,7 @@ const HostRoom = () => {
 
     // Wait for a second before checking elements (or use MutationObserver)
     setTimeout(() => {
-      const videoElement = meetingRef.current.querySelector('video');
+      const videoElement = document.querySelector('video');
       console.log(videoElement);
       if (videoElement) {
         videoElement.classList.add('mirror-video'); // Apply mirror effect
@@ -145,7 +145,7 @@ const HostRoom = () => {
       
       // Check for other elements
       if (meetingRef.current) {
-        const elements = meetingRef.current.querySelectorAll("*");
+        const elements = document.querySelectorAll("*");
         console.log("Child elements count:", elements.length);
         elements.forEach((el, index) => {
           console.log(`Element ${index + 1}:`, el);
