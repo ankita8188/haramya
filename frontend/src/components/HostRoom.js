@@ -26,46 +26,35 @@ const HostRoom = () => {
   };
 
   const connectWebSocket = (isLive = false) => {
-    console.log(process.env.NEXT_PUBLIC_API_ID)
     const websocket = new WebSocket(`wss${process.env.NEXT_PUBLIC_API_URL}/ws`);
     websocket.onopen = () => {
       console.log('WebSocket connected');
-      console.log(websocket)
       wsRef.current = websocket;
-      console.log(isHostLive)
       if (isLive) {
-        websocket.send(JSON.stringify({
-          type: 'live_status',
-          isLive: true,
-          roomId: id
-        }));
+        websocket.send(
+          JSON.stringify({
+            type: 'live_status',
+            isLive: true,
+            roomId: id,
+          })
+        );
       }
     };
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
         console.log('Received message:', data);
-
         if (data.type === 'system') {
           console.log('System message:', data.message);
         } else if (data.type === 'control') {
           speakMessage(data.command);
         } else if (data.type === 'live_status') {
-          console.log('Live status received:', data.isLive);
-
           if (data.roomId !== id) {
             console.warn('Room ID mismatch. Host is live in another room.');
-            setShouldConnect(false);
-            setShowWaitingMessage(true);
-            setRoomMismatch(true);
             return;
           }
 
-          setRoomMismatch(false);
           setIsHostLive(data.isLive);
-
-          setShouldConnect(data.isLive);
-          setShowWaitingMessage(!data.isLive);
         }
       } catch (error) {
         console.error('Error parsing message:', error);
@@ -88,72 +77,51 @@ const HostRoom = () => {
   useEffect(() => {
     if (!id || !meetingRef.current) return;
 
-    console.log(process.env.NEXT_PUBLIC_API_ID)
-    console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     const appId = parseInt(process.env.NEXT_PUBLIC_API_ID);
     const serverSecret = process.env.NEXT_PUBLIC_SECRET_KEY;
     const userID = randomID();
     const userName = `Host_${userID}`;
 
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
-      appId, serverSecret, String(id), userID, userName
+      appId,
+      serverSecret,
+      String(id),
+      userID,
+      userName
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
 
     zp.joinRoom({
       container: meetingRef.current,
-      useFrontFacingCamera: false,
+      useFrontFacingCamera: false, // Use back camera
       scenario: {
         mode: ZegoUIKitPrebuilt.LiveStreaming,
         config: { role: ZegoUIKitPrebuilt.Host },
       },
-      sharedLinks: [
-        {
-          name: 'Copy Audience Link',
-          url: `https${process.env.NEXT_PUBLIC_FRONTEND_URL}/room/${id}`,
-        },
-      ],
       onLiveStart: () => {
-        console.log("live started")
+        console.log('Live started');
         setIsHostLive(true);
-        console.log(isHostLive)
         connectWebSocket(true);
       },
       onLiveEnd: () => {
-        console.log("live ended")
+        console.log('Live ended');
         setIsHostLive(false);
-        console.log(ws + " " + WebSocket.OPEN)
         if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-          wsRef.current.send(JSON.stringify({
-            type: 'live_status',
-            isLive: false,
-            roomId: id,
-          }));
+          wsRef.current.send(
+            JSON.stringify({
+              type: 'live_status',
+              isLive: false,
+              roomId: id,
+            })
+          );
         }
         disconnectWebSocket();
       },
     });
 
-    // Wait for a second before checking elements (or use MutationObserver)
-    setTimeout(() => {
-      const videoElement = meetingRef.current.querySelector('video');
-      console.log(videoElement);
-      if (videoElement) {
-        videoElement.classList.add('mirror-video'); // Apply mirror effect
-      }
-      
-      // Check for other elements
-      if (meetingRef.current) {
-        const elements = meetingRef.current.querySelectorAll("*");
-        console.log("Child elements count:", elements.length);
-        elements.forEach((el, index) => {
-          console.log(`Element ${index + 1}:`, el);
-        });
-      } else {
-        console.warn("meetingRef is not attached yet!");
-      }
-    }, 1000);  // Wait 1 second to ensure elements are rendered
+    // Set video mirror mode to prevent local preview mirror (only affect the published stream)
+    zp.setVideoMirrorMode(ZegoUIKitPrebuilt.ZegoVideoMirrorMode.ZegoVideoMirrorModeNoMirror);
 
   }, [id]);
 
