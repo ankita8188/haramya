@@ -101,7 +101,12 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-    console.log("abjbcsvd"+meetingRef)
+    if (meetingRef.current) {
+      const allElements = meetingRef.current.querySelectorAll("*");
+      allElements.forEach((el, index) => {
+        console.log(`Element ${index + 1}:`, el);
+      });
+    }
     zp.joinRoom({
       container: meetingRef.current,
       useFrontFacingCamera: false,
