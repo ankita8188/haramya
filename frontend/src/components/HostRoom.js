@@ -104,6 +104,7 @@ console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
 
     zp.joinRoom({
       container: meetingRef.current,
+      useFrontFacingCamera: false,
       scenario: {
         mode: ZegoUIKitPrebuilt.LiveStreaming,
         config: { role: ZegoUIKitPrebuilt.Host },
