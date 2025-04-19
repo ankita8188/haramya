@@ -31,35 +31,29 @@ const HostRoom = () => {
       console.log('WebSocket connected');
       wsRef.current = websocket;
       if (isLive) {
-        websocket.send(
-          JSON.stringify({
-            type: 'live_status',
-            isLive: true,
-            roomId: id,
-          })
-        );
+        websocket.send(JSON.stringify({
+          type: 'live_status',
+          isLive: true,
+          roomId: id
+        }));
       }
     };
+
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        console.log('Received message:', data);
-        if (data.type === 'system') {
-          console.log('System message:', data.message);
-        } else if (data.type === 'control') {
-          speakMessage(data.command);
-        } else if (data.type === 'live_status') {
+        if (data.type === 'live_status') {
           if (data.roomId !== id) {
-            console.warn('Room ID mismatch. Host is live in another room.');
+            setIsHostLive(false);
             return;
           }
-
           setIsHostLive(data.isLive);
         }
       } catch (error) {
         console.error('Error parsing message:', error);
       }
     };
+
     websocket.onclose = () => {
       console.log('WebSocket disconnected');
       wsRef.current = null;
@@ -83,45 +77,44 @@ const HostRoom = () => {
     const userName = `Host_${userID}`;
 
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
-      appId,
-      serverSecret,
-      String(id),
-      userID,
-      userName
+      appId, serverSecret, String(id), userID, userName
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
 
     zp.joinRoom({
       container: meetingRef.current,
-      useFrontFacingCamera: false, // Use back camera
+      useFrontFacingCamera: false,  // Set this if you need the back camera
       scenario: {
         mode: ZegoUIKitPrebuilt.LiveStreaming,
         config: { role: ZegoUIKitPrebuilt.Host },
       },
       onLiveStart: () => {
-        console.log('Live started');
+        console.log("Live started");
         setIsHostLive(true);
         connectWebSocket(true);
       },
       onLiveEnd: () => {
-        console.log('Live ended');
+        console.log("Live ended");
         setIsHostLive(false);
         if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-          wsRef.current.send(
-            JSON.stringify({
-              type: 'live_status',
-              isLive: false,
-              roomId: id,
-            })
-          );
+          wsRef.current.send(JSON.stringify({
+            type: 'live_status',
+            isLive: false,
+            roomId: id,
+          }));
         }
         disconnectWebSocket();
       },
     });
 
-    // Set video mirror mode to prevent local preview mirror (only affect the published stream)
-    zp.setVideoMirrorMode(ZegoUIKitPrebuilt.ZegoVideoMirrorMode.ZegoVideoMirrorModeNoMirror);
+    // Apply the mirror mode for the video
+    const videoElement = meetingRef.current.querySelector('video');
+    if (videoElement) {
+      const zegoEngine = zp.getEngine();
+      zegoEngine.setVideoMirrorMode(ZegoUIKitPrebuilt.ZegoVideoMirrorModeNoMirror); // Disable mirror effect
+      console.log("Mirror mode set to NoMirror");
+    }
 
   }, [id]);
 
