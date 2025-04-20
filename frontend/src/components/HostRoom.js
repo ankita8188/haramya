@@ -148,7 +148,7 @@ const HostRoom = () => {
       }
 
      
-    }, 4000); 
+    }, 6000); 
   });
 } else {
   console.log("Join Room button not found.");
