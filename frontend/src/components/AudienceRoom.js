@@ -108,7 +108,39 @@ const AudienceRoom = () => {
     });
     connectWebSocket()
 
+    setTimeout(()=>{
+      console.log("hihihi")
+    const joinRoomButton = getButtonByText("Join");
+    if (joinRoomButton) {
+     joinRoomButton.addEventListener('click', () => {
+    console.log("Join Room button clicked!");
+    setTimeout(() => {
+      const videoElement = document.querySelector('video');
+      console.log(videoElement);
+      if (videoElement) {
+        videoElement.classList.add('mirror-video'); // Apply mirror effect
+      }
+
+     
+    }, 4000); 
+  });
+} else {
+  console.log("Join Room button not found.");
+}
+  },4000);
+
+
   }, [id]);
+
+  function getButtonByText(text) {
+    const buttons = document.querySelectorAll('button');
+    for (let btn of buttons) {
+      if (btn.textContent.trim() === text) {
+        return btn;
+      }
+    }
+    return null;
+  }
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#000' }}>
