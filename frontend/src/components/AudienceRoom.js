@@ -8,29 +8,23 @@ import { randomID } from './Zegoshared';
 const AudienceRoom = () => {
   const meetingRef = useRef(null);
   const { id } = useParams();
+  const router = useRouter();
 
   const [shouldConnect, setShouldConnect] = useState(false);
   const [roomMismatch, setRoomMismatch] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [ws, setWs] = useState(null);
-
-  const router = useRouter();
+  const [isHostLive, setIsHostLive] = useState(false);
 
   const handleSendMessage = (msg) => {
     if (ws && isConnected) {
-      ws.send(JSON.stringify({
-        type: 'control',
-        command: msg
-      }));
+      ws.send(JSON.stringify({ type: 'control', command: msg }));
     }
   };
 
   const disconnectWebSocket = () => {
-    if (ws) {
-      setWs(null)
-
-    }
-    router.push("/")
+    if (ws) setWs(null);
+    router.push('/');
   };
 
   const connectWebSocket = () => {
@@ -44,55 +38,40 @@ const AudienceRoom = () => {
         roomId: id,
       }));
     };
+
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        console.log('Received message:', data);
-
-        if (data.type === 'system') {
-          console.log('System message:', data.message);
-        }  else if (data.type === 'live_status') {
-          console.log('Live status received:', data.isLive);
+        if (data.type === 'live_status') {
           setTimeout(() => {
             const videoElement = document.querySelector('video');
-            console.log(videoElement);
             if (videoElement) {
-              videoElement.classList.add('mirror-video'); // Apply mirror effect
+              videoElement.classList.add('mirror-video');
             }
-      
-           
-          }, 3000); 
-          if(!data.isLive){
-            console.log("ended")
-            disconnectWebSocket()
-        
+          }, 3000);
+
+          if (!data.isLive) {
+            disconnectWebSocket();
             return;
           }
+
           if (data.roomId !== id) {
-            console.warn('Room ID mismatch. Host is live in another room.');
-              setShouldConnect(false);
-              setShowWaitingMessage(true);
-              setRoomMismatch(true);
-            
+            setShouldConnect(false);
+            setRoomMismatch(true);
             return;
           }
 
           setRoomMismatch(false);
-          setIsHostLive(data.isLive);
-
-            setShouldConnect(data.isLive);
-            setShowWaitingMessage(!data.isLive);
-          
+          setIsHostLive(true);
+          setShouldConnect(true);
         }
       } catch (error) {
-        console.error('Error parsing message:', error);
+        console.error('WebSocket parsing error:', error);
       }
     };
+
     websocket.onclose = () => setIsConnected(false);
   };
-
-
-  
 
   useEffect(() => {
     if (!id || !meetingRef.current) return;
@@ -107,7 +86,6 @@ const AudienceRoom = () => {
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-
     zp.joinRoom({
       container: meetingRef.current,
       scenario: {
@@ -115,65 +93,78 @@ const AudienceRoom = () => {
         config: { role: ZegoUIKitPrebuilt.Audience },
       },
     });
-    connectWebSocket()
 
-   
-
-
-
+    connectWebSocket();
   }, [id]);
 
-  function getButtonByText(text) {
-    const buttons = document.querySelectorAll('button');
-    for (let btn of buttons) {
-      if (btn.textContent.trim() === text) {
-        return btn;
-      }
-    }
-    return null;
-  }
-
   return (
-    <div style={{ width: '100vw', height: '100vh', background: '#000' }}>
-      <div ref={meetingRef} style={{ width: '100%', height: '90%' }} />
-      
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)',
+      fontFamily: 'Arial, sans-serif',
+      color: '#fff',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      <div ref={meetingRef} style={{ width: '100%', height: '85%' }} />
+
       {roomMismatch && (
         <div style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
+          top: 0, left: 0,
+          width: '100%', height: '100%',
           backgroundColor: 'rgba(0,0,0,0.85)',
           color: '#fff',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: '24px'
+          fontSize: '24px',
+          fontWeight: 'bold',
+          zIndex: 100
         }}>
-          Room ID mismatch. Please check with host.
+          ❌ Room ID mismatch. Please check with host.
         </div>
       )}
 
-      <div style={{ textAlign: 'center', marginTop: '10px' }}>
-        <div style={{ color: isConnected ? 'green' : 'red' }}>
-          {isConnected ? 'Connected' : 'Disconnected'}
+      <div style={{
+        textAlign: 'center',
+        padding: '15px',
+        backgroundColor: '#111',
+        borderTop: '1px solid #444',
+        boxShadow: '0 -2px 6px rgba(0,0,0,0.3)'
+      }}>
+        <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>
+          Connection Status:
+          <span style={{
+            color: isConnected ? '#4CAF50' : '#F44336',
+            marginLeft: '10px'
+          }}>
+            {isConnected ? '✅ Connected' : '❌ Disconnected'}
+          </span>
         </div>
-        <div style={{ marginTop: '10px' }}>
+
+        <div>
           {['Left', 'Up', 'Down', 'Right'].map(dir => (
             <button
               key={dir}
               onClick={() => handleSendMessage(dir)}
               disabled={!isConnected}
               style={{
-                margin: '5px',
-                padding: '10px 20px',
-                backgroundColor: '#4CAF50',
-                color: 'white',
+                margin: '8px',
+                padding: '10px 22px',
+                background: '#1e88e5',
                 border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
+                borderRadius: '6px',
+                color: '#fff',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                opacity: isConnected ? 1 : 0.5,
+                transition: 'background 0.3s',
               }}
+              onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+              onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
             >
               {dir}
             </button>

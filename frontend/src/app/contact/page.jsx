@@ -56,11 +56,11 @@ export default function ContactPage() {
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex gap-6 items-center text-sm">
-              <a href="#" className="hover:underline">Home</a>
-              <a href="#" className="hover:underline">Who are you?</a>
-              <a href="#" className="hover:underline">Destinations</a>
-              <a href="#" className="hover:underline">About Us</a>
-              <a href="#" className="hover:underline">Contact Us</a>
+              <Link href="#" className="hover:underline">Home</Link>
+              <Link href="#" className="hover:underline">Who are you?</Link>
+              <Link href="#" className="hover:underline">Destinations</Link>
+              <Link href="#" className="hover:underline">About Us</Link>
+              <Link href="#" className="hover:underline">Contact Us</Link>
               <ShoppingCart className="w-5 h-5 cursor-pointer hover:text-gray-300 transition" />
               <User className="w-5 h-5 cursor-pointer hover:text-gray-300 transition" />
             </nav>
