@@ -100,14 +100,14 @@ const AudienceRoom = () => {
   return (
     <div style={{
       width: '100vw',
-      height: '100vh',
+      height: '77vh',
       background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)',
       fontFamily: 'Arial, sans-serif',
       color: '#fff',
       position: 'relative',
       overflow: 'hidden'
     }}>
-      <div ref={meetingRef} style={{ width: '100%', height: '80%' }} />
+      <div ref={meetingRef} style={{ width: '100%', height: '77%' }} />
 
       {roomMismatch && (
         <div style={{
