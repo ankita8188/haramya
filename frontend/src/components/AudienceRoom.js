@@ -53,6 +53,15 @@ const AudienceRoom = () => {
           console.log('System message:', data.message);
         }  else if (data.type === 'live_status') {
           console.log('Live status received:', data.isLive);
+          setTimeout(() => {
+            const videoElement = document.querySelector('video');
+            console.log(videoElement);
+            if (videoElement) {
+              videoElement.classList.add('mirror-video'); // Apply mirror effect
+            }
+      
+           
+          }, 4000); 
           if(!data.isLive){
             console.log("ended")
             disconnectWebSocket()
@@ -108,26 +117,8 @@ const AudienceRoom = () => {
     });
     connectWebSocket()
 
-    setTimeout(()=>{
-      console.log("hihihi")
-    const joinRoomButton = getButtonByText("Join");
-    if (joinRoomButton) {
-     joinRoomButton.addEventListener('click', () => {
-    console.log("Join Room button clicked!");
-    setTimeout(() => {
-      const videoElement = document.querySelector('video');
-      console.log(videoElement);
-      if (videoElement) {
-        videoElement.classList.add('mirror-video'); // Apply mirror effect
-      }
+   
 
-     
-    }, 4000); 
-  });
-} else {
-  console.log("Join Room button not found.");
-}
-  },4000);
 
 
   }, [id]);
