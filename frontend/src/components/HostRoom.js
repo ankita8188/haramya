@@ -140,15 +140,16 @@ const HostRoom = () => {
     if (joinRoomButton) {
      joinRoomButton.addEventListener('click', () => {
     console.log("Join Room button clicked!");
-    setTimeout(() => {
+    setInterval(() => {
       const videoElement = document.querySelector('video');
       console.log(videoElement);
       if (videoElement) {
+        if(!videoElement.classList.contains('mirror-video'))
         videoElement.classList.add('mirror-video'); // Apply mirror effect
       }
 
      
-    }, 6000); 
+    }, 4000); 
   });
 } else {
   console.log("Join Room button not found.");
