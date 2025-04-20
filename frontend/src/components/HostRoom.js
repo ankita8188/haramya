@@ -134,28 +134,37 @@ const HostRoom = () => {
         disconnectWebSocket();
       },
     });
-
+    const joinRoomButton = getButtonByText("Join");
     // Wait for a second before checking elements (or use MutationObserver)
+    if (joinRoomButton) {
+     joinRoomButton.addEventListener('click', () => {
+    console.log("Join Room button clicked!");
     setTimeout(() => {
       const videoElement = document.querySelector('video');
       console.log(videoElement);
       if (videoElement) {
         videoElement.classList.add('mirror-video'); // Apply mirror effect
       }
-      
-      // Check for other elements
-      if (meetingRef.current) {
-        const elements = document.querySelectorAll("*");
-        console.log("Child elements count:", elements.length);
-        elements.forEach((el, index) => {
-          console.log(`Element ${index + 1}:`, el);
-        });
-      } else {
-        console.warn("meetingRef is not attached yet!");
-      }
-    }, 4000);  // Wait 1 second to ensure elements are rendered
+
+     
+    }, 4000); 
+  });
+} else {
+  console.log("Join Room button not found.");
+}
 
   }, [id]);
+
+  function getButtonByText(text) {
+    const buttons = document.querySelectorAll('button');
+    for (let btn of buttons) {
+      if (btn.textContent.trim() === text) {
+        return btn;
+      }
+    }
+    return null;
+  }
+  
 
   return <div ref={meetingRef} style={{ width: '100vw', height: '100vh' }} />;
 };
