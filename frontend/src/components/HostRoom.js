@@ -135,6 +135,7 @@ const HostRoom = () => {
       },
     });
     setTimeout(()=>{
+      console.log("hihihi")
     const joinRoomButton = getButtonByText("Join");
     if (joinRoomButton) {
      joinRoomButton.addEventListener('click', () => {
