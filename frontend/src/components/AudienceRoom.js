@@ -61,7 +61,7 @@ const AudienceRoom = () => {
             }
       
            
-          }, 4000); 
+          }, 3000); 
           if(!data.isLive){
             console.log("ended")
             disconnectWebSocket()

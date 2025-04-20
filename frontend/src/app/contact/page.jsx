@@ -238,7 +238,7 @@ export default function ContactPage() {
 
           {/* Lord Shiva Image */}
           <div className="w-full md:w-1/2">
-            <Image
+            <img
               src="/cont2.jfif"
               alt="Lord Shiva"
               width={400}
