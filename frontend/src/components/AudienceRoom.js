@@ -8,22 +8,27 @@ import { randomID } from './Zegoshared';
 const AudienceRoom = () => {
   const meetingRef = useRef(null);
   const { id } = useParams();
-  const router = useRouter();
 
   const [shouldConnect, setShouldConnect] = useState(false);
   const [roomMismatch, setRoomMismatch] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [ws, setWs] = useState(null);
-  const [isHostLive, setIsHostLive] = useState(false);
+
+  const router = useRouter();
 
   const handleSendMessage = (msg) => {
     if (ws && isConnected) {
-      ws.send(JSON.stringify({ type: 'control', command: msg }));
+      ws.send(JSON.stringify({
+        type: 'control',
+        command: msg
+      }));
     }
   };
 
   const disconnectWebSocket = () => {
-    if (ws) setWs(null);
+    if (ws) {
+      setWs(null);
+    }
     router.push('/');
   };
 
@@ -38,38 +43,42 @@ const AudienceRoom = () => {
         roomId: id,
       }));
     };
-
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.type === 'live_status') {
+        console.log('Received message:', data);
+
+        if (data.type === 'system') {
+          console.log('System message:', data.message);
+        } else if (data.type === 'live_status') {
           setTimeout(() => {
             const videoElement = document.querySelector('video');
+            console.log(videoElement);
             if (videoElement) {
               videoElement.classList.add('mirror-video');
             }
           }, 3000);
 
           if (!data.isLive) {
+            console.log("ended");
             disconnectWebSocket();
             return;
           }
 
           if (data.roomId !== id) {
+            console.warn('Room ID mismatch. Host is live in another room.');
             setShouldConnect(false);
             setRoomMismatch(true);
             return;
           }
 
           setRoomMismatch(false);
-          setIsHostLive(true);
-          setShouldConnect(true);
+          setShouldConnect(data.isLive);
         }
       } catch (error) {
-        console.error('WebSocket parsing error:', error);
+        console.error('Error parsing message:', error);
       }
     };
-
     websocket.onclose = () => setIsConnected(false);
   };
 
@@ -86,6 +95,7 @@ const AudienceRoom = () => {
     );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
+
     zp.joinRoom({
       container: meetingRef.current,
       scenario: {
@@ -101,49 +111,46 @@ const AudienceRoom = () => {
     <div style={{
       width: '100vw',
       height: '100vh',
-      background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)',
-      fontFamily: 'Arial, sans-serif',
-      color: '#fff',
+      background: '#000',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
     }}>
-      <div ref={meetingRef} style={{ width: '100%', height: '85%' }} />
+      <div ref={meetingRef} style={{ width: '100%', height: '100%' }} />
 
       {roomMismatch && (
         <div style={{
           position: 'absolute',
-          top: 0, left: 0,
-          width: '100%', height: '100%',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
           backgroundColor: 'rgba(0,0,0,0.85)',
           color: '#fff',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: '24px',
-          fontWeight: 'bold',
-          zIndex: 100
+          zIndex: 20,
         }}>
-          ❌ Room ID mismatch. Please check with host.
+          Room ID mismatch. Please check with host.
         </div>
       )}
 
       <div style={{
-        textAlign: 'center',
-        padding: '15px',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
         backgroundColor: '#111',
+        padding: '10px 0',
         borderTop: '1px solid #444',
-        boxShadow: '0 -2px 6px rgba(0,0,0,0.3)'
+        boxShadow: '0 -2px 6px rgba(0,0,0,0.3)',
+        textAlign: 'center',
+        zIndex: 10,
       }}>
-        <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>
-          Connection Status:
-          <span style={{
-            color: isConnected ? '#4CAF50' : '#F44336',
-            marginLeft: '10px'
-          }}>
-            {isConnected ? '✅ Connected' : '❌ Disconnected'}
-          </span>
+        <div style={{ color: isConnected ? 'lime' : 'red', marginBottom: '8px' }}>
+          {isConnected ? 'Connected' : 'Disconnected'}
         </div>
-
         <div>
           {['Left', 'Up', 'Down', 'Right'].map(dir => (
             <button
@@ -151,20 +158,15 @@ const AudienceRoom = () => {
               onClick={() => handleSendMessage(dir)}
               disabled={!isConnected}
               style={{
-                margin: '8px',
-                padding: '10px 22px',
-                background: '#1e88e5',
+                margin: '5px',
+                padding: '10px 18px',
+                backgroundColor: '#4CAF50',
+                color: 'white',
                 border: 'none',
-                borderRadius: '6px',
-                color: '#fff',
+                borderRadius: '5px',
                 cursor: 'pointer',
-                fontWeight: 'bold',
-                fontSize: '16px',
-                opacity: isConnected ? 1 : 0.5,
-                transition: 'background 0.3s',
+                fontSize: '14px',
               }}
-              onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-              onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
             >
               {dir}
             </button>
