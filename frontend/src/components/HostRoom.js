@@ -134,8 +134,8 @@ const HostRoom = () => {
         disconnectWebSocket();
       },
     });
+    setTimeout(()=>{
     const joinRoomButton = getButtonByText("Join");
-    // Wait for a second before checking elements (or use MutationObserver)
     if (joinRoomButton) {
      joinRoomButton.addEventListener('click', () => {
     console.log("Join Room button clicked!");
@@ -152,6 +152,7 @@ const HostRoom = () => {
 } else {
   console.log("Join Room button not found.");
 }
+  },4000);
 
   }, [id]);
 
