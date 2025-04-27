@@ -114,6 +114,7 @@ wss.on('connection', (ws, req) => {
               type: 'live_status',
               isLive: data.isLive,
               from: clientId,
+              roomid: data.roomid,
             }));
           }
         });
@@ -125,6 +126,7 @@ wss.on('connection', (ws, req) => {
             type: 'control',
             command: data.command,
             from: clientId,
+            roomId: data.roomId,
           }));
         }
       });
