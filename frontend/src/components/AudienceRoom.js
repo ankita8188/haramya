@@ -43,14 +43,15 @@ const router = useRouter();
       try {
         const data = JSON.parse(event.data);
         if (data.type === 'live_status' && data.roomId===id) {
-          setTimeout(() => {
+          setInterval(() => {
             const videoElement = document.querySelector('video');
             if (videoElement) {
               videoElement.classList.add('mirror-video');
             }
-          }, 3000);
+          }, 2000);
 
           if (!data.isLive && data.roomId===id) {
+            console.log("data status")
             disconnectWebSocket();
             return;
           }
