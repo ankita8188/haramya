@@ -42,6 +42,7 @@ const router = useRouter();
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
+        console.log(data)
         if (data.type === 'live_status' && data.roomId===id) {
           setInterval(() => {
             const videoElement = document.querySelector('video');
