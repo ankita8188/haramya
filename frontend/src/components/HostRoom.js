@@ -48,9 +48,9 @@ const HostRoom = () => {
 
         if (data.type === 'system') {
           console.log('System message:', data.message);
-        } else if (data.type === 'control') {
+        } else if (data.type === 'control' && data.roomId==id) {
           speakMessage(data.command);
-        } else if (data.type === 'live_status') {
+        } else if (data.type === 'live_status' && roomId==id) {
           console.log('Live status received:', data.isLive);
 
           if (data.roomId !== id) {
