@@ -114,7 +114,7 @@ wss.on('connection', (ws, req) => {
               type: 'live_status',
               isLive: data.isLive,
               from: clientId,
-              roomid: data.roomid,
+              roomId: data.roomId,
             }));
           }
         });
