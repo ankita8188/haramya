@@ -6,9 +6,9 @@ import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import { randomID } from './Zegoshared';
 
 const AudienceRoom = () => {
-  const meetingRef = useRef(null);
-  const { id } = useParams();
-  const router = useRouter();
+const meetingRef = useRef(null);
+const { id } = useParams();
+const router = useRouter();
 
   const [shouldConnect, setShouldConnect] = useState(false);
   const [roomMismatch, setRoomMismatch] = useState(false);
@@ -18,7 +18,7 @@ const AudienceRoom = () => {
 
   const handleSendMessage = (msg) => {
     if (ws && isConnected) {
-      ws.send(JSON.stringify({ type: 'control', command: msg }));
+      ws.send(JSON.stringify({ type: 'control', command: msg, roomId: id }));
     }
   };
 
@@ -42,7 +42,7 @@ const AudienceRoom = () => {
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.type === 'live_status') {
+        if (data.type === 'live_status' && data.roomId===id) {
           setTimeout(() => {
             const videoElement = document.querySelector('video');
             if (videoElement) {
@@ -50,12 +50,12 @@ const AudienceRoom = () => {
             }
           }, 3000);
 
-          if (!data.isLive) {
+          if (!data.isLive && data.roomId===id) {
             disconnectWebSocket();
             return;
           }
 
-          if (data.roomId !== id) {
+          if (data.roomId !== id ) {
             setShouldConnect(false);
             setRoomMismatch(true);
             return;
