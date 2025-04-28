@@ -150,7 +150,7 @@ const router = useRouter();
   position: 'relative',
   width: '120px',
   height: '120px',
-  top: '70px', 
+  bottom: '70px', 
   margin: '50px auto',
   border:'1px solid red',
   borderRadius:'50%',
