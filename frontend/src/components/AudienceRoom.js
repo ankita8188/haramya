@@ -257,55 +257,7 @@ const router = useRouter();
     <FaArrowDown />
   </button>
 
-  {/* Bottom Left Button */}
-  <button
-    onClick={() => handleSendMessage('LeftDown')}
-    disabled={!isConnected}
-    style={{
-      position: 'absolute',
-      bottom: '30px',
-      left: '30px',
-      background: '#1e88e5',
-      border: 'none',
-      borderRadius: '50%',
-      color: '#fff',
-      width: '60px',
-      height: '60px',
-      fontSize: '24px',
-      cursor: 'pointer',
-      opacity: isConnected ? 1 : 0.5,
-      transition: 'background 0.3s',
-    }}
-    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-  >
-    <FaArrowDown />
-  </button>
 
-  {/* Bottom Right Button */}
-  <button
-    onClick={() => handleSendMessage('RightDown')}
-    disabled={!isConnected}
-    style={{
-      position: 'absolute',
-      bottom: '30px',
-      right: '30px',
-      background: '#1e88e5',
-      border: 'none',
-      borderRadius: '50%',
-      color: '#fff',
-      width: '60px',
-      height: '60px',
-      fontSize: '24px',
-      cursor: 'pointer',
-      opacity: isConnected ? 1 : 0.5,
-      transition: 'background 0.3s',
-    }}
-    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-  >
-    <FaArrowDown />
-  </button>
 </div>
 
       </div>
