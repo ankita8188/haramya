@@ -179,7 +179,7 @@ export default function Home() {
   </div>
 
   {/* Right Side - Main Image + Description */}
-  <div className=" border w-[80vw] flex flex-col items-center lg:px-0 px-4 sm:px-6 mt-[-30px] sm:mt-[-120px] xl:mt-[-230px]">
+  <div className=" border w-[80vw]  flex flex-col items-center lg:px-0 px-4 sm:px-6 mt-[-30px] sm:mt-[-120px] xl:mt-[-230px]">
     <div className="w-full sm:w-[80vw] xl:w-[60vw]">
       <Image
         src="/elephant.webp"
