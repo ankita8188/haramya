@@ -80,7 +80,7 @@ export default function BestDestinations() {
                 
                   className="rounded-full w-[3rem] h-[3rem] bg-white  border-2 border-white"
                 />
-                <span className="text-md poppins">Shot by <br /> <strong>{dest.author}</strong></span>
+                <span className="text-md poppins">Shot by<br /> <strong>{dest.author}</strong></span>
               </div>
             </div>
           </div>
