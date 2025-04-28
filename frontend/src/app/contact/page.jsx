@@ -76,7 +76,7 @@ export default function ContactPage() {
       <div className="mb-4">
         <h2 className="text-2xl font-semibold text-white">Let's connect real-life heroes</h2>
         <p className="text-sm text-gray-400 mt-1">
-          We'd love to hear from you! Fill out the form below and our team will get back to you shortly.
+          We had love to hear from you! Fill out the form below and our team will get back to you shortly.
         </p>
       </div>
 
