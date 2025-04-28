@@ -308,7 +308,10 @@ const WelcomePopup = () => {
               lineHeight: '1.6',
               color: '#444'
             }}>
-              This map contains interactive features. Click on the map to place a marker at any location.
+              Harmya contains realtime 170 degree videos.
+Rotate, Zoom and Control the movements of the localite using the controls on the bottom, mouse, touch screen or VR controller.<br/>
+Use the available green hostspots to navigate city and start your realtime tour to that place, and continue your exploration journey across the different esatics of city.
+You can also navigate the city in birds eye mode and enjoy the city from top(this top view is not realtime).
             </p>
           )}
 
@@ -591,7 +594,7 @@ const WelcomePopup = () => {
             padding: isMobile ? '0 10px' : '0'
           }}>
             <img
-              src={steps[stepIndex].img}
+              src='welcome.jfif'
               alt="Step illustration"
               style={{ 
                 width: '100%', 

@@ -193,12 +193,17 @@ export default function ContactPage() {
       <div className="bg-black text-white w-full">
 
         {/* WhatsApp Banner */}
-        <div className='bg-black pt-[6rem] pl-4 sm:pl-[1rem]'>
-          <div className='bg-[linear-gradient(0deg,_#037D01_0%,_#025C00_100%)] h-[6rem] sm:h-[8rem] w-full max-w-[70rem] mx-auto px-12 rounded-full flex flex-col sm:flex-row justify-between items-center sm:items-center  sm:gap-0 shadow-lg'>
-            <p className='text-lg sm:text-3xl text-white mt-3 sm:mt-[1rem] mr-4 sm:mr-[2rem] font-semibold'>Contact Us On Whatsapp</p>
-            <button className='bg-white rounded-xl w-29 sm:w-34 h-8 sm:h-15 text-base sm:text-md text-green-400 '>Start Chat</button>
+        <div className='bg-black pt-12 pb-16 sm:pt-16 sm:pb-20 px-4 sm:px-6 lg:px-8'>
+          <div className='bg-[linear-gradient(0deg,_#037D01_0%,_#025C00_100%)] h-auto min-h-[8rem] sm:min-h-[10rem] md:min-h-[12rem] w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-6 py-6 sm:px-8 md:px-12 rounded-3xl sm:rounded-full flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 shadow-lg'>
+            <p className='text-center sm:text-left text-lg sm:text-xl md:text-2xl lg:text-3xl text-white poppins font-semibold leading-tight'>
+              Contact Us On Whatsapp
+            </p>
+            <button className='bg-white rounded-lg sm:rounded-xl px-4 py-2 sm:px-5 sm:py-2 md:px-6 text-sm sm:text-base md:text-lg poppins text-green-600 font-medium hover:bg-gray-100 transition duration-200 flex-shrink-0 whitespace-nowrap'>
+              Start Chat
+            </button>
           </div>
         </div>
+
 
         {/* Middle Section with Image + Form */}
         <div className="flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 md:px-24 py-6 sm:py-10 gap-6 sm:gap-10">
