@@ -151,6 +151,7 @@ const router = useRouter();
   width: '400px',
   height: '400px',
   margin: '50px auto',
+  border:'1px solid red'
 }}>
   {/* Up Button */}
   <button
