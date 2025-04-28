@@ -109,7 +109,7 @@ const router = useRouter();
       position: 'relative',
     
     }}>
-      <div ref={meetingRef} style={{position:'relative', width: '100%', height: '77%' }} />
+      <div ref={meetingRef} style={{position:'relative', width: '100%', height: '90%' }} />
 
       {roomMismatch && (
         <div style={{
