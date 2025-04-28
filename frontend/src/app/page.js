@@ -186,7 +186,7 @@ export default function Home() {
         alt="Elephant Image"
         width={1400}
         height={890}
-        className="object-cover rounded-3xl w-full h-auto mt-10 sm:mt-16 xl:mt-20"
+        className="object-cover rounded-3xl w-full h-auto mt-10 sm:mt-16 xl:mt-20    "
         priority
       />
     </div>
