@@ -158,9 +158,9 @@ const router = useRouter();
         disabled={!isConnected}
         style={{
           position: 'absolute',
-          top: '0',
+          top: '20px',
           left: '50%',
-          transform: 'translate(-50%, -50%)',
+          transform: 'translateX(-50%)',
           background: '#1e88e5',
           border: 'none',
           borderRadius: '50%',
@@ -185,8 +185,8 @@ const router = useRouter();
         style={{
           position: 'absolute',
           top: '50%',
-          left: '0',
-          transform: 'translate(-50%, -50%)',
+          left: '10px',
+          transform: 'translateY(-50%)',
           background: '#1e88e5',
           border: 'none',
           borderRadius: '50%',
@@ -211,8 +211,8 @@ const router = useRouter();
         style={{
           position: 'absolute',
           top: '50%',
-          right: '0',
-          transform: 'translate(50%, -50%)',
+          right: '10px',
+          transform: 'translateY(-50%)',
           background: '#1e88e5',
           border: 'none',
           borderRadius: '50%',
@@ -236,9 +236,9 @@ const router = useRouter();
         disabled={!isConnected}
         style={{
           position: 'absolute',
-          bottom: '0',
+          bottom: '20px',
           left: '50%',
-          transform: 'translate(-50%, 50%)',
+          transform: 'translateX(-50%)',
           background: '#1e88e5',
           border: 'none',
           borderRadius: '50%',
