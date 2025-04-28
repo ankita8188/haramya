@@ -45,7 +45,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-black text-white font-sans">
+      <div className="min-h-screen bg-black text-white font-sans pt-4">
         {/* Header */}
       <Navbar></Navbar>
 
