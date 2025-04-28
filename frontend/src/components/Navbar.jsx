@@ -26,21 +26,21 @@ const [plannerSubMenuOpen, setPlannerSubMenuOpen] = useState(false);
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#4CAAB8] py-2 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-[#1A959E]  text-white ">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex space-x-2 relative w-60">
-          <p className="text-[75px] top-[20px] text-black island font-island leading-none">
+          <p className="text-[55px] top-[20px] text-black island font-island leading-none">
             Harmya
           </p>
-          <p className="text-[20px] italic island absolute left-[135px] top-[57px] text-black">
+          <p className="text-[10px] italic island absolute left-[105px] top-[37px] text-black">
             making travel easy
           </p>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex flex-1 justify-end items-center space-x-3 sm:space-x-6 lg:space-x-10 text-sm sm:text-base lg:text-lg font-medium">
-          <Link href="/" className="hover:underline text-xl">
+        <div className="hidden md:flex flex-1 justify-end items-center space-x-1 sm:space-x-6 lg:space-x-5 text-sm sm:text-base lg:text-lg font-medium">
+          <Link href="/" className="hover:underline text-sm">
             Home
           </Link>
 
@@ -48,7 +48,7 @@ const [plannerSubMenuOpen, setPlannerSubMenuOpen] = useState(false);
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setWhoDropdownOpen(!whoDropdownOpen)}
-              className="text-xl hover:underline focus:outline-none"
+              className="text-sm hover:underline focus:outline-none"
             >
               Who are you?
             </button>
@@ -184,23 +184,23 @@ const [plannerSubMenuOpen, setPlannerSubMenuOpen] = useState(false);
             )}
           </div>
 
-          <Link href="/destination" className="hover:underline text-xl">
+          <Link href="/destination" className="hover:underline text-sm">
             Destinations
           </Link>
-          <Link href="/about" className="hover:underline text-xl">
+          <Link href="/about" className="hover:underline text-sm">
             About Us
           </Link>
-          <Link href="/contact" className="hover:underline text-xl">
+          <Link href="/contact" className="hover:underline text-sm">
             Contact Us
           </Link>
 
           {/* Icons */}
           <div className="flex items-center space-x-4 sm:space-x-5 lg:space-x-6">
             <Link href="/cart" aria-label="Shopping Cart">
-              <FiShoppingCart className="text-2xl sm:text-[26px] lg:text-3xl hover:scale-110 transition-transform" />
+              <FiShoppingCart className="text-md sm:text-[26px] lg:text-xl hover:scale-110 transition-transform" />
             </Link>
             <Link href="/login" aria-label="User Account">
-              <FiUser className="text-2xl sm:text-[26px] lg:text-3xl hover:scale-110 transition-transform" />
+              <FiUser className="text-md sm:text-[26px] lg:text-xl hover:scale-110 transition-transform" />
             </Link>
           </div>
         </div>
@@ -231,7 +231,7 @@ const [plannerSubMenuOpen, setPlannerSubMenuOpen] = useState(false);
           <Link href="/who/agent" onClick={() => setMenuOpen(false)} className="block">
             Travel Agent
           </Link>
-          <Link href="/destinations" onClick={() => setMenuOpen(false)} className="block">
+          <Link href="/destination" onClick={() => setMenuOpen(false)} className="block">
             Destinations
           </Link>
           <Link href="/about" onClick={() => setMenuOpen(false)} className="block">
