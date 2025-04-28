@@ -148,8 +148,8 @@ const router = useRouter();
 
         <div style={{
   position: 'relative',
-  width: '200px',
-  height: '200px',
+  width: '400px',
+  height: '400px',
   margin: '50px auto',
 }}>
   {/* Up Button */}
