@@ -148,8 +148,8 @@ const router = useRouter();
 
         <div style={{
   position: 'relative',
-  width: '400px',
-  height: '400px',
+  width: '200px',
+  height: '200px',
   margin: '50px auto',
   border:'1px solid red'
 }}>
