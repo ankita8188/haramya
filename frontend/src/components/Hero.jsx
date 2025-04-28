@@ -30,7 +30,7 @@ Now, Meera smiles as she virtually walks through the corridors of her dream dest
 
 </section>
 <div className='bg-gradient-to-r from-black to-gray-900 p-4 sm:p-6'>
-        <h1 className='text-[20] sm:text-[30px] text-center font-semibold text-white imperial'>Harmaya</h1>
+        <h1 className='text-[20px] sm:text-[30px] text-center font-semibold text-white imperial'>Harmaya</h1>
         <p className='text-lg sm:text-xl font-semibold text-center text-white montserrat'>Explore at the comfort of your homes, making travel easy</p>
       </div>
       <div className='border border-red-4 bg-[linear-gradient(0deg,_#000_0%,_#028B95_100%)] pt-8 h-auto sm:h-[6rem]  '>

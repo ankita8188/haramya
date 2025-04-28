@@ -136,15 +136,6 @@ const router = useRouter();
         borderTop: '1px solid #444',
         boxShadow: '0 -2px 6px rgba(0,0,0,0.3)'
       }}>
-        <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>
-          Connection Status:
-          <span style={{
-            color: isConnected ? '#4CAF50' : '#F44336',
-            marginLeft: '10px'
-          }}>
-            {isConnected ? '✅ Connected' : '❌ Disconnected'}
-          </span>
-        </div>
 
         <div style={{
   position: 'relative',
