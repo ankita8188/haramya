@@ -147,115 +147,166 @@ const router = useRouter();
         </div>
 
         <div style={{
-      position: 'relative',
-      width: '200px',
-      height: '200px',
-      margin: '50px auto',
-    }}>
-      {/* Up Button */}
-      <button
-        onClick={() => handleSendMessage('Up')}
-        disabled={!isConnected}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          background: '#1e88e5',
-          border: 'none',
-          borderRadius: '50%',
-          color: '#fff',
-          width: '60px',
-          height: '60px',
-          fontSize: '24px',
-          cursor: 'pointer',
-          opacity: isConnected ? 1 : 0.5,
-          transition: 'background 0.3s',
-        }}
-        onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-        onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-      >
-        <FaArrowUp />
-      </button>
+  position: 'relative',
+  width: '200px',
+  height: '200px',
+  margin: '50px auto',
+}}>
+  {/* Up Button */}
+  <button
+    onClick={() => handleSendMessage('Up')}
+    disabled={!isConnected}
+    style={{
+      position: 'absolute',
+      top: '10px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      background: '#1e88e5',
+      border: 'none',
+      borderRadius: '50%',
+      color: '#fff',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      cursor: 'pointer',
+      opacity: isConnected ? 1 : 0.5,
+      transition: 'background 0.3s',
+    }}
+    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
+  >
+    <FaArrowUp />
+  </button>
 
-      {/* Left Button */}
-      <button
-        onClick={() => handleSendMessage('Left')}
-        disabled={!isConnected}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '10px',
-          transform: 'translateY(-50%)',
-          background: '#1e88e5',
-          border: 'none',
-          borderRadius: '50%',
-          color: '#fff',
-          width: '60px',
-          height: '60px',
-          fontSize: '24px',
-          cursor: 'pointer',
-          opacity: isConnected ? 1 : 0.5,
-          transition: 'background 0.3s',
-        }}
-        onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-        onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-      >
-        <FaArrowLeft />
-      </button>
+  {/* Left Button */}
+  <button
+    onClick={() => handleSendMessage('Left')}
+    disabled={!isConnected}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: '10px',
+      transform: 'translateY(-50%)',
+      background: '#1e88e5',
+      border: 'none',
+      borderRadius: '50%',
+      color: '#fff',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      cursor: 'pointer',
+      opacity: isConnected ? 1 : 0.5,
+      transition: 'background 0.3s',
+    }}
+    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
+  >
+    <FaArrowLeft />
+  </button>
 
-      {/* Right Button */}
-      <button
-        onClick={() => handleSendMessage('Right')}
-        disabled={!isConnected}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '10px',
-          transform: 'translateY(-50%)',
-          background: '#1e88e5',
-          border: 'none',
-          borderRadius: '50%',
-          color: '#fff',
-          width: '60px',
-          height: '60px',
-          fontSize: '24px',
-          cursor: 'pointer',
-          opacity: isConnected ? 1 : 0.5,
-          transition: 'background 0.3s',
-        }}
-        onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-        onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-      >
-        <FaArrowRight />
-      </button>
+  {/* Right Button */}
+  <button
+    onClick={() => handleSendMessage('Right')}
+    disabled={!isConnected}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      right: '10px',
+      transform: 'translateY(-50%)',
+      background: '#1e88e5',
+      border: 'none',
+      borderRadius: '50%',
+      color: '#fff',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      cursor: 'pointer',
+      opacity: isConnected ? 1 : 0.5,
+      transition: 'background 0.3s',
+    }}
+    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
+  >
+    <FaArrowRight />
+  </button>
 
-      {/* Down Button */}
-      <button
-        onClick={() => handleSendMessage('Down')}
-        disabled={!isConnected}
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          background: '#1e88e5',
-          border: 'none',
-          borderRadius: '50%',
-          color: '#fff',
-          width: '60px',
-          height: '60px',
-          fontSize: '24px',
-          cursor: 'pointer',
-          opacity: isConnected ? 1 : 0.5,
-          transition: 'background 0.3s',
-        }}
-        onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-        onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-      >
-        <FaArrowDown />
-      </button>
-    </div>
+  {/* Down Button */}
+  <button
+    onClick={() => handleSendMessage('Down')}
+    disabled={!isConnected}
+    style={{
+      position: 'absolute',
+      bottom: '10px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      background: '#1e88e5',
+      border: 'none',
+      borderRadius: '50%',
+      color: '#fff',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      cursor: 'pointer',
+      opacity: isConnected ? 1 : 0.5,
+      transition: 'background 0.3s',
+    }}
+    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
+  >
+    <FaArrowDown />
+  </button>
+
+  {/* Bottom Left Button */}
+  <button
+    onClick={() => handleSendMessage('LeftDown')}
+    disabled={!isConnected}
+    style={{
+      position: 'absolute',
+      bottom: '30px',
+      left: '30px',
+      background: '#1e88e5',
+      border: 'none',
+      borderRadius: '50%',
+      color: '#fff',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      cursor: 'pointer',
+      opacity: isConnected ? 1 : 0.5,
+      transition: 'background 0.3s',
+    }}
+    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
+  >
+    <FaArrowDown />
+  </button>
+
+  {/* Bottom Right Button */}
+  <button
+    onClick={() => handleSendMessage('RightDown')}
+    disabled={!isConnected}
+    style={{
+      position: 'absolute',
+      bottom: '30px',
+      right: '30px',
+      background: '#1e88e5',
+      border: 'none',
+      borderRadius: '50%',
+      color: '#fff',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      cursor: 'pointer',
+      opacity: isConnected ? 1 : 0.5,
+      transition: 'background 0.3s',
+    }}
+    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
+    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
+  >
+    <FaArrowDown />
+  </button>
+</div>
+
       </div>
     </div>
   );
