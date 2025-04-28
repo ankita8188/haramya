@@ -18,42 +18,49 @@ const slides = [
     image:
       '/rumi-darwaza-from-bara.jpg',
   },
-  
 ];
 
-const BharatCarousel = () => {
+const BharatInfoSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
-  const { title, heading, content, image } = slides[currentIndex];
+  const { heading, content, image } = slides[currentIndex];
 
   return (
-    <div className="bg-black text-white w-full max-w-[95rem] mx-auto p-4 sm:p-6 shadow-lg">
-      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-        {/* Right Side */}
-        <div className="w-full md:w-3/4">
-          <h2 className="text-xl sm:text-2xl font-semibold mt-4 sm:mt-8 text-[20px] sm:text-[25px] ml-4 sm:ml-6">{heading}</h2>
-          <p className="text-sm sm:text-base leading-relaxed text-[16px] sm:text-[20px] ml-4 sm:ml-6">{content}</p>
-
-          <div className="flex justify-end mt-4 sm:mt-6">
+    <div className="bg-black text-white w-full max-w-7xl mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-lg">
+      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-12">
+        <div className="w-full md:w-1/2 flex flex-col order-1">
+          <div className="mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 sm:mb-3 poppins">
+              {heading}
+            </h2>
+            <p className="text-sm sm:text-base lg:text-lg leading-relaxed">
+              {content}
+            </p>
+          </div>
+          
+          <div className="flex justify-center md:justify-start mt-auto pt-4">
             <button
               onClick={nextSlide}
-              className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full ml-4 sm:ml-8"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black 
+                         w-12 h-12 sm:w-14 sm:h-14 rounded-full 
+                         flex items-center justify-center 
+                         text-2xl sm:text-3xl font-bold 
+                         transition duration-300"
             >
               →
             </button>
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 text-center">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-[18px] sm:text-[22px]">{title}</h2>
+        <div className="w-full md:w-1/2 order-2">
           <img 
             src={image} 
-            alt={title} 
-            className="w-full max-w-[400px] h-auto rounded-xl shadow-md mx-auto" 
+            alt={heading}
+            className="w-full max-w-md sm:max-w-lg md:max-w-full h-auto rounded-lg sm:rounded-xl md:rounded-2xl shadow-md mx-auto md:mx-0" 
           />
         </div>
       </div>
@@ -61,4 +68,4 @@ const BharatCarousel = () => {
   );
 };
 
-export default BharatCarousel;
+export default BharatInfoSection;

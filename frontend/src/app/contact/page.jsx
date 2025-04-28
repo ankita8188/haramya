@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa6';
 import Link from "next/link";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
 
 
@@ -46,56 +47,20 @@ export default function ContactPage() {
     <>
       <div className="min-h-screen bg-black text-white font-sans">
         {/* Header */}
-     
-          <header className="bg-[#00D5BE] text-white px-4 sm:px-6 py-2 flex justify-between items-center">
-            {/* Logo and Tagline */}
-            <Link href="/" className="flex flex-col w-fit">
-              <p className="text-2xl sm:text-3xl md:text-4xl island leading-none">Harmya</p>
-              <p className="text-xs sm:text-sm island italic ml-4 sm:ml-12">making travel easy</p>
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex gap-6 items-center text-sm">
-              <Link href="#" className="hover:underline">Home</Link>
-              <Link href="#" className="hover:underline">Who are you?</Link>
-              <Link href="#" className="hover:underline">Destinations</Link>
-              <Link href="#" className="hover:underline">About Us</Link>
-              <Link href="#" className="hover:underline">Contact Us</Link>
-              <ShoppingCart className="w-5 h-5 cursor-pointer hover:text-gray-300 transition" />
-              <User className="w-5 h-5 cursor-pointer hover:text-gray-300 transition" />
-            </nav>
-
-            {/* Mobile Hamburger Icon */}
-            <div className="md:hidden flex items-center">
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                {mobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
-              </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {mobileMenuOpen && (
-              <div className="absolute top-16 left-0 w-full bg-[#1d3557] text-white flex flex-col gap-4 items-center py-4 shadow-md z-50 md:hidden">
-                <a href="#" className="hover:underline" onClick={() => setMobileMenuOpen(false)}>Home</a>
-                <a href="#" className="hover:underline" onClick={() => setMobileMenuOpen(false)}>Who are you?</a>
-                <a href="#" className="hover:underline" onClick={() => setMobileMenuOpen(false)}>Destinations</a>
-                <a href="#" className="hover:underline" onClick={() => setMobileMenuOpen(false)}>About Us</a>
-                <a href="#" className="hover:underline" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
-                <div className="flex gap-6 mt-2">
-                  <ShoppingCart className="w-5 h-5 cursor-pointer hover:text-gray-300" />
-                  <User className="w-5 h-5 cursor-pointer hover:text-gray-300" />
-                </div>
-              </div>
-            )}
-          </header>
+      <Navbar></Navbar>
 
           {/* Main */}
-          <main className="flex flex-col items-center justify-center text-center py-8 sm:py-16 px-4">
-  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-    Get in <span className="text-teal-400">touch</span>
+          <main className="flex flex-col items-center justify-center text-center py-8 sm:py-16 px-4 bg-[#0A0D17]">
+  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent"  style={{
+          WebkitBackgroundClip: 'text', // Important for Safari
+          backgroundClip: 'text',
+          WebkitTextFillColor: 'transparent', // Important for Safari
+          backgroundImage: `
+            linear-gradient(89.29deg, #FFFFFF 49.86%, #004247 76.63%, #004247 104.63%),
+            linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3))
+          `
+        }}>
+    Get in touch
   </h1>
   <p className="text-gray-300 mt-4 max-w-2xl text-sm sm:text-base md:text-lg">
     Reach out, and let's create a universe of possibilities together!
@@ -170,13 +135,14 @@ export default function ContactPage() {
 
       <div className="min-h-screen w-full text-white flex flex-col items-center">
         {/* Top section: Dark Blue background */}
-        <div className="w-full h-20 bg-gradient-to-b from-cyan-300 via-cyan-800 to-[#0c0f27]"></div>
+        <div className="w-full h-35 "style={{ background: "linear-gradient(0deg, #000000 0%, #028B95 100%)" }}
+        ></div>
 
         {/* Content section: Black background */}
         <div className="w-full bg-black px-4 sm:px-6 py-8 flex flex-col items-center">
 
           {/* Heading */}
-          <div className="text-center">
+          <div className="text-center mt-[-110px] mb-20">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
               Bharat, a civilization lasting from eternity
             </h1>
@@ -185,8 +151,9 @@ export default function ContactPage() {
             </p>
           </div>
 
+
           {/* Map + Floating Info Box */}
-          <div className="relative w-full max-w-5xl h-[300px] sm:h-[400px] mb-10">
+          <div className="relative w-full max-w-5xl h-[300px] sm:h-[400px] mb-10 ">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.581010906885!2d80.954577814884!3d26.85053568316002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfdcc4f6d52ff%3A0x7fc7eebc617de59c!2sUniversity%20of%20Lucknow!5e0!3m2!1sen!2sin!4v1618921764584!5m2!1sen!2sin"
               width="100%"
@@ -199,7 +166,7 @@ export default function ContactPage() {
             ></iframe>
 
             {/* Floating Info Box */}
-            <div className="absolute -left-4 sm:-left-20 top-14 bg-white text-black px-4 sm:px-6 py-8 sm:py-14 rounded-4xl shadow-2xl w-[90%] sm:w-80 max-w-xs z-10 ">
+            <div className="absolute -left-4 sm:-left-20 top-14 bg-white text-black px-4 sm:px-6 py-8 sm:py-5 rounded-4xl shadow-2xl w-[90%] sm:w-80 max-w-xs z-10 ">
               <h2 className="text-2xl font-semibold mb-2">Locate Us</h2>
               <p className="text-sm mb-2">
                 Questions, comments, or suggestions? Simply fill in the form above and we'll get in touch shortly.
@@ -213,9 +180,9 @@ export default function ContactPage() {
           </div>
 
           {/* Footer */}
-          <footer className="text-center text-sm text-gray-400 mt-auto">
-            <span className="font-serif italic">Harmya</span><br />
-            <span className="text-white font-medium">
+          <footer className="text-center text-sm text-white mt-auto">
+            <span className="text-4xl imperial">Harmya</span><br />
+            <span className="text-white text-lg font-medium montserrat">
               Explore at the comfort of your homes, making travel easy
             </span>
           </footer>
@@ -226,10 +193,10 @@ export default function ContactPage() {
       <div className="bg-black text-white w-full">
 
         {/* WhatsApp Banner */}
-        <div className='bg-black pt-[6rem] pl-4 sm:pl-[4rem]'>
-          <div className='bg-[linear-gradient(0deg,_#037D01_0%,_#025C00_100%)] h-[6rem] sm:h-[8rem] w-full max-w-[85rem] mx-auto pl-4 rounded-full flex flex-col sm:flex-row justify-center items-center sm:items-center gap-4 sm:gap-0 shadow-lg'>
-            <p className='text-lg sm:text-xl text-white mt-4 sm:mt-[2rem] mr-4 sm:mr-[2rem]'>Contact Us On Whatsapp</p>
-            <button className='bg-gray-300 rounded-xl w-32 sm:w-40 h-8 sm:h-10 text-base sm:text-xl text-green-400 text-center'>Start Chat</button>
+        <div className='bg-black pt-[6rem] pl-4 sm:pl-[1rem]'>
+          <div className='bg-[linear-gradient(0deg,_#037D01_0%,_#025C00_100%)] h-[6rem] sm:h-[8rem] w-full max-w-[70rem] mx-auto px-12 rounded-full flex flex-col sm:flex-row justify-between items-center sm:items-center  sm:gap-0 shadow-lg'>
+            <p className='text-lg sm:text-3xl text-white mt-3 sm:mt-[1rem] mr-4 sm:mr-[2rem] font-semibold'>Contact Us On Whatsapp</p>
+            <button className='bg-white rounded-xl w-29 sm:w-34 h-8 sm:h-15 text-base sm:text-md text-green-400 '>Start Chat</button>
           </div>
         </div>
 
@@ -241,7 +208,7 @@ export default function ContactPage() {
             <img
               src="/cont2.jfif"
               alt="Lord Shiva"
-              width={400}
+              width={300}
               height={300}
               className="rounded-xl shadow-md w-full h-auto"
             />
@@ -250,13 +217,13 @@ export default function ContactPage() {
           {/* Newsletter Form */}
           <div className="w-full md:w-1/2">
             <h3 className="text-xl font-semibold mb-4">Subscribe For Newsletter</h3>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center mb-4">
               <input
                 type="email"
                 placeholder="Your Email"
-                className="px-4 py-4 rounded-md text-black bg-white w-full"
+                className="px-4 py-4 rounded-tl-md rounded-bl-md text-black bg-white w-[60%]"
               />
-              <button className="bg-cyan-500 text-white px-4 py-4 rounded-md hover:bg-cyan-600 transition">
+              <button className="w-[30%] bg-[#00AAA1] text-white px-4 py-4 rounded-tr-md rounded-br-md hover:bg-cyan-600 transition">
                 Subscribe
               </button>
             </div>
@@ -272,34 +239,56 @@ export default function ContactPage() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="bg-[#1a3a3a] py-6 flex justify-between px-6 md:px-24 text-gray-300">
-          <Link href="/" className="flex space-x-2 relative">
-            <p className="text-6xl top-[20px] text-white island font-island leading-none">
+
+        <footer className="bg-[#002623] text-white  pt-10 px-3 md:px-15">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start space-y-10 md:space-y-0">
+
+          {/* Logo and Tagline */}
+          <div className="flex flex-col items-start">
+            <p className="text-[75px] text-white island leading-none">
               Harmya
             </p>
-            <p className="text-xl italic island absolute left-10 top-[57px] text-white">
+            <p className="text-[18px] italic island text-yellow-400  ml-36 mt-[-25px]">
               making travel easy
             </p>
-          </Link>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm mr-10">
-            <div>
-              <p>About</p>
-              <p>About us</p>
-              <p>Read All</p>
-              <p>Host a Stay</p>
+          </div>
+
+
+          {/* Sections Container */}
+          <div className="flex flex-col sm:flex-row justify-between gap-14 w-full md:w-auto mr-20 mb-10">
+
+            {/* About Section */}
+            <div className="text-left">
+              <h2 className="font-semibold mb-2 text-xl md:text-lg font-poppins">About</h2>
+              <ul className="space-y-1 leading-1.5">
+                <li><a href="#" className="hover:underline text-lg md:text-sm leading-6 font-poppins">About us</a></li>
+                <li><a href="#" className="hover:underline text-lg md:text-sm leading-6 font-poppins">Features</a></li>
+                <li><a href="#" className="hover:underline text-lg md:text-sm leading-6 font-poppins">News & Blogs</a></li>
+              </ul>
             </div>
-            <div>
-              <p>Contact</p>
-              <p>Instagram</p>
-              <p>Twitter</p>
+
+            {/* Contact Section */}
+            <div className="text-left">
+              <h2 className="font-semibold mb-2 text-xl md:text-lg font-poppins">Contact</h2>
+              <ul className="space-y-1">
+                <li><a href="#" className="hover:underline text-lg md:textsm leading-6 font-poppins">Instagram</a></li>
+                <li><a href="#" className="hover:underline text-lg md:textsm leading-6 font-poppins">Twitter</a></li>
+                <li><a href="#" className="hover:underline text-lg md:textsm leading-6 font-poppins">Facebook</a></li>
+              </ul>
             </div>
-            <div>
-              <p>Support</p>
-              <p>FAQs</p>
-              <p>Refund / Contact</p>
+
+            {/* Support Section */}
+            <div className="text-left">
+              <h2 className="font-semibold mb-2 text-xl md:text-lg font-poppins">Support</h2>
+              <ul className="space-y-1">
+                <li><a href="#" className="hover:underline text-lg md:text-sm leading-6 font-poppins">FAQs</a></li>
+                <li><a href="#" className="hover:underline text-lg md:text-sm leading-6 font-poppins">Support Centre</a></li>
+                <li><a href="#" className="hover:underline text-lg md:text-sm leading-6 font-poppins">Feedback</a></li>
+              </ul>
             </div>
           </div>
         </div>
+      </footer>
       </div>
     </>
 

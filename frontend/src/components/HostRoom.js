@@ -144,11 +144,14 @@ const HostRoom = () => {
       const videoElement = document.querySelector('video');
       console.log(videoElement);
       if (videoElement) {
-        if(!videoElement.classList.contains('mirror-video'))
-        videoElement.classList.add('mirror-video'); // Apply mirror effect
+        if(!videoElement.classList.contains('mirror-video')){
+
+        videoElement.classList.add('mirror-video');
+        console.log("set")
+        } // Apply mirror effect
       }
 
-     
+     console.log("doneeee")
     }, 4000); 
   });
 } else {

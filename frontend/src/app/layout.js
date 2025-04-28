@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import { Island_Moments,Montserrat_Alternates,Noto_Sans, Funnel_Sans, Be_Vietnam_Pro, Imperial_Script } from "next/font/google";
 import "./globals.css";
 
@@ -49,6 +49,14 @@ const imperial = Imperial_Script({
   weight: "400", // Only 400 is available for this font
 });
 
+
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'], // Choose weights you need
+  display: 'swap',
+})
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -62,6 +70,7 @@ export default function RootLayout({ children }) {
          ${funnel.variable} 
          ${vietnam.variable}
          ${imperial.variable}
+         ${poppins.variable}
          antialiased`}
       >
         {children}

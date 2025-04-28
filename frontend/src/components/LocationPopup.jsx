@@ -22,8 +22,15 @@ const LocationPopup = ({ onClose }) => {
         if (step === 1) {
             setStep(2); // Go to next step
         } else {
-            console.log({ name, state, city, ageGroup, device, payment });
-            onClose(); // Final submission
+            // Handle payment flow
+            const paymentParams = new URLSearchParams({
+                amount: total,
+                userId: userId,
+                locationId: 'LOCATION_ID', // Replace with actual location ID
+                locationName: 'LOCATION_NAME' // Replace with actual location name
+            });
+            
+            window.location.href = `/payment?${paymentParams.toString()}`;
         }
     };
 
@@ -222,7 +229,7 @@ const LocationPopup = ({ onClose }) => {
 
                 <div style={btnWrapper}>
                     <button style={nextBtnStyle} onClick={handleNext}>
-                        {step === 1 ? 'Next' : 'Pay To Start Now'}
+                        {step === 1 ? 'Next' : 'Pay To Start '}
                     </button>
                 </div>
 

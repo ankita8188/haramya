@@ -18,10 +18,9 @@ const slides = [
     image:
       '/rumi-darwaza-from-bara.jpg',
   },
-  
 ];
 
-const BharatCarousel = () => {
+const InfoCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -31,43 +30,42 @@ const BharatCarousel = () => {
   const { title, heading, content, image } = slides[currentIndex];
 
   return (
-    <div className='w-full'>
-      <div className='bg-gradient-to-r from-black to-gray-900 p-4 sm:p-6'>
-        <h1 className='text-xl sm:text-2xl font-bold text-center font-semibold text-white'>Harmaya</h1>
-        <p className='text-lg sm:text-xl font-semibold text-center text-white'>Explore at the comfort of your homes, making travel easy</p>
-      </div>
-      <div className='border border-red-4 bg-[linear-gradient(0deg,_#000_0%,_#028B95_100%)] h-auto sm:h-[6rem] p-4 sm:p-6'>
-        <h1 className="text-xl sm:text-2xl font-bold text-center font-semibold mt-4 sm:mt-8 text-white">
-          Bharat, a civilization lasting from eternity
-        </h1>
-        <h3 className='text-lg sm:text-xl font-semibold text-center mb-4 sm:mb-6 text-white'>A uniquely Bharat experience awaits you always</h3>
-      </div>
-      <div className="bg-black text-white w-full max-w-[95rem] mx-auto p-4 sm:p-6 mt-4 sm:mt-8 shadow-lg">
-        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-          {/* Left Side */}
-          <div className="w-full md:w-1/2 text-center">
-            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-[18px] sm:text-[20px]">{title}</h2>
+    <div className='w-full bg-black'>
+      <div className="text-white w-full max-w-7xl mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-lg">
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-12">
+          <div className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6">
+              {title}
+            </h2>
             <img 
               src={image} 
               alt={title} 
-              className="w-full max-w-[400px] h-auto rounded-xl shadow-md mx-auto" 
+              className="w-full max-w-md sm:max-w-lg md:max-w-full h-auto rounded-lg sm:rounded-xl md:rounded-2xl shadow-md mx-auto md:mx-0" 
             />
           </div>
 
-          {/* Right Side */}
-          <div className="w-full md:w-3/4">
-            <h2 className="text-xl sm:text-2xl font-semibold text-[20px] sm:text-[25px]">{heading}</h2>
-            <p className="text-sm sm:text-base leading-relaxed text-[16px] sm:text-[20px]">{content}</p>
-          </div>
+          <div className="w-full md:w-1/2 order-1 md:order-2 flex flex-col">
+            <div className="mb-6 md:mb-8">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 sm:mb-3">
+                {heading}
+              </h2>
+              <p className="text-sm sm:text-base lg:text-lg leading-relaxed">
+                {content}
+              </p>
+            </div>
 
-          {/* Right Arrow Only */}
-          <div className="flex justify-end mt-4 sm:mt-6">
-            <button
-              onClick={nextSlide}
-              className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full"
-            >
-              →
-            </button>
+            <div className="flex justify-center md:justify-end mt-auto pt-4">
+              <button
+                onClick={nextSlide}
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black 
+                           w-12 h-12 sm:w-14 sm:h-14 rounded-full 
+                           flex items-center justify-center 
+                           text-2xl sm:text-3xl font-bold 
+                           transition duration-300"
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -75,4 +73,4 @@ const BharatCarousel = () => {
   );
 };
 
-export default BharatCarousel;
+export default InfoCarousel;
