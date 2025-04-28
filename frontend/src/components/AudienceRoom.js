@@ -102,7 +102,7 @@ const router = useRouter();
   return (
     <div style={{
       width: '100vw',
-      height: '70vh',
+      height: '90vh',
       background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)',
       fontFamily: 'Arial, sans-serif',
       color: '#fff',
@@ -150,7 +150,7 @@ const router = useRouter();
   position: 'relative',
   width: '120px',
   height: '120px',
-  top: '20px', 
+  top: '70px', 
   margin: '50px auto',
   border:'1px solid red',
   borderRadius:'50%',
