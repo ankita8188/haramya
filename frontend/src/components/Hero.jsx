@@ -23,10 +23,10 @@ const Hero = () => {
           </p>
 
           <div className="p-4 sm:p-6 bg-gradient-to-r from-black to-gray-900 text-white text-sm sm:text-base h-auto sm:h-[15rem] absolute bottom-5 sm:bottom-10 left-4 sm:left-5 right-4 sm:right-5 opacity-80 rounded-2xl overflow-hidden shadow-lg">
-            <p className="poppins text-[14px] sm:text-[13px] leading-relaxed">
+            <p className="poppins text-[10px] sm:text-[13px] leading-relaxed">
             Meera sat by the window, staring at the distant horizon. At 72, her legs no longer supported long journeys, but her heart still wandered through the places she had only heard about in stories. The grand temples, the sacred rivers, the bustling streets of historic cities—she had always dreamt of visiting them. "I wish I had seen them once," she sighed, folding her trembling hands in prayer. It wasn’t just her—many of her friends, bound by age, responsibilities, or financial constraints, shared the same unfulfilled longing. Some struggled with health, others with time, and for many, travel was simply too expensive. But what if they didn’t have to kill their desires? What if they could explore the unseen corners of their own country, feel the serenity of temples, witness the divine grandeur of pilgrimages—all from the comfort of their homes?</p>
 
-            <p className="pt-4 poppins text-[14px] sm:text-[13px] leading-relaxed">
+            <p className="pt-4 poppins text-[10px] sm:text-[13px] leading-relaxed">
             HARMYA was born from this very dream. A way to travel without barriers, to experience the beauty of one's own land, to embrace the stories and faith that shaped them—all without the limitations of age, money, or time.
               Now, Meera smiles as she virtually walks through the corridors of her dream destinations. The world she thought was beyond her reach is now just a click away
          </p>
