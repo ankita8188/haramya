@@ -4,66 +4,67 @@ export default function BestDestinations() {
   const destinations = [
     {
       title: "Place name",
-      subtitle: "#Europe",
-      img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-      author: "Shanky",
-      profile: "https://randomuser.me/api/portraits/men/32.jpg",
+      subtitle: "about place",
+      img: "neom-GCrvnNHJAMo-unsplash1.jpg",
+      author: "Traveler",
+    
       rowSpan: "row-span-3",    },
     {
       title: "Place name",
-      subtitle: "Asia's view",
-      img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-      author: "Shanky",
-      profile: "https://randomuser.me/api/portraits/women/44.jpg",
+      subtitle: "about place",
+      img: "omar-al-ghosson-YS23gFKcxRk-unsplash1.jpg",
+      author: "Traveler",
+    
       rowSpan: "row-span-2",
       
     },
     {
       title: "Place name",
-      subtitle: "Mountains",
-      img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      author: "Shanky Prakash",
-      profile: "https://randomuser.me/api/portraits/men/45.jpg",
+      subtitle: "about place",
+      img: "jeremiah-del-mar-NjZPpFQlTPs-unsplash1.jpg",
+      author: "influencer",
+
       rowSpan: "row-span-3",
         },
     {
       title: "The best of Place name",
-      subtitle: "#culture",
-      img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-      author: "Shanky",
-      profile: "https://randomuser.me/api/portraits/women/33.jpg",
+      subtitle: "about place ",
+      img: "saleh-caljrUf41Jw-unsplash1.jpg",
+      author: "influencer",
+    
       rowSpan: "row-span-3",
     },
     {
       title: "Place name",
-      subtitle: "Explore now",
-      img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-      author: "Shanky",
-      profile: "https://randomuser.me/api/portraits/men/60.jpg",
+      subtitle: "about place",
+      img: "pawel-nolbert-62OK9xwVA0c-unsplash1.jpg",
+      author: "Traveler",
+    
       rowSpan: "row-span-2",
         },
     {
       title: "The best things to do in place name",
-      subtitle: "#adventure",
-      img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-      author: "Shanky",
-      profile: "https://randomuser.me/api/portraits/women/12.jpg",
+      subtitle: "about place",
+      img: "Al-Hada-Mountain-min1.jpg",
+      author: "Traveler",
+    
       rowSpan: "row-span-2",
     },
   ];
 
   return (
     <div className="min-h-screen bg-black text-white px-6 py-10">
-      <h1 className="text-3xl font-bold text-center mb-2">Best Destinations</h1>
-      <p className="text-center text-gray-400 mb-10">
-        Explore the amazing journeys shared by travelers.<br></br> The best amazing places to see during a season of joy.
+      <h1 className="text-white text-center  text-4xl  poppins mb-2 font-bold">Best Destinations</h1>
+      <p className="text-gray-300 text-center  text-xl poppins not-italic font-normal text-base/6 mb-10">
+      Explore the enchanting landscapes of Bharat, from <br />
+      the breathtaking deserts to the stunning coastal shores.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[10rem] gap-6">
                 {destinations.map((dest, idx) => (
           <div
             key={idx}
-            className={`rounded-2xl overflow-hidden relative bg-cover bg-center ${dest.rowSpan || "row-span-2"}`}      
+            className={`rounded-2xl overflow-hidden relative bg-cover bg-center poppins ${dest.rowSpan || "row-span-2"}`}      
             style={{ backgroundImage: `url(${dest.img})` }}
           >
             <div className="absolute inset-0 bg-black/40 p-4 flex flex-col justify-between">
@@ -71,17 +72,15 @@ export default function BestDestinations() {
                 <h2 className="text-3xl font-bold capitalize leading-snug">
                   {dest.title}
                 </h2>
-                <p className="text-lg text-gray-300">{dest.subtitle}</p>
+                <p className="text-lg text-gray-300 poppins">{dest.subtitle}</p>
               </div>
               <div className="flex items-center gap-2">
-                <Image
-                  src={dest.profile}
-                  width={60}
-                  height={60}
-                  alt="author"
-                  className="rounded-full border-2 border-white"
+              <div
+                
+                
+                  className="rounded-full w-[3rem] h-[3rem] bg-white  border-2 border-white"
                 />
-                <span className="text-md">Start by <strong>{dest.author}</strong></span>
+                <span className="text-md poppins">Shot by <br /> <strong>{dest.author}</strong></span>
               </div>
             </div>
           </div>
