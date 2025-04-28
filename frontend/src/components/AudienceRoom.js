@@ -152,9 +152,9 @@ const router = useRouter();
   height: '120px',
   bottom: '70px', 
   margin: '50px auto',
-  border:'1px solid red',
+  border:'1px solid white',
   borderRadius:'50%',
-  backgroundColor:'#1e88e5',
+  backgroundColor:'gray',
   position:'absolute',
   zIndex: 100,  
 
