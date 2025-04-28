@@ -109,7 +109,7 @@ const router = useRouter();
       position: 'relative',
     
     }}>
-      <div ref={meetingRef} style={{ width: '100%', height: '77%' }} />
+      <div ref={meetingRef} style={{position:'relative', width: '100%', height: '77%' }} />
 
       {roomMismatch && (
         <div style={{
@@ -150,10 +150,14 @@ const router = useRouter();
   position: 'relative',
   width: '120px',
   height: '120px',
+  top: '20px', 
   margin: '50px auto',
   border:'1px solid red',
   borderRadius:'50%',
-  backgroundColor:'#1e88e5'
+  backgroundColor:'#1e88e5',
+  position:'absolute',
+  zIndex: 100,  
+
 }}>
   {/* Up Button */}
   <button
