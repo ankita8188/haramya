@@ -9,7 +9,7 @@ const Payment = () => {
 
   const initiatePayment = async () => {
     try {
-        console.log("djvhgvs")
+      
       const response = await axios.post('http://localhost:5000/api/payment', {
         amount,
         mobileNumber,

@@ -30,10 +30,10 @@ const InfoCarousel = () => {
   const { title, heading, content, image } = slides[currentIndex];
 
   return (
-    <div className='w-full bg-black'>
-      <div className="text-white w-full max-w-7xl mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-lg">
+    <div className='w-full bg-black' data-aos="fade-up">
+      <div className="text-white w-full max-w-7xl mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-lg" data-aos="fade-up" data-aos-delay="100">
         <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-12">
-          <div className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
+          <div className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1" data-aos="slide-right" data-aos-delay="200">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6">
               {title}
             </h2>
@@ -41,10 +41,11 @@ const InfoCarousel = () => {
               src={image} 
               alt={title} 
               className="w-full max-w-md sm:max-w-lg md:max-w-full h-auto rounded-lg sm:rounded-xl md:rounded-2xl shadow-md mx-auto md:mx-0" 
+              data-aos="zoom-in" data-aos-delay="300"
             />
           </div>
 
-          <div className="w-full md:w-1/2 order-1 md:order-2 flex flex-col">
+          <div className="w-full md:w-1/2 order-1 md:order-2 flex flex-col" data-aos="slide-left" data-aos-delay="200">
             <div className="mb-6 md:mb-8">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 sm:mb-3">
                 {heading}

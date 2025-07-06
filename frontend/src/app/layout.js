@@ -1,6 +1,11 @@
+
+import ClientWrapper from "./Clientwrapper";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import { Island_Moments,Montserrat_Alternates,Noto_Sans, Funnel_Sans, Be_Vietnam_Pro, Imperial_Script } from "next/font/google";
 import "./globals.css";
+import "aos/dist/aos.css";
+
+import AOS from "aos";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +62,7 @@ const poppins = Poppins({
   display: 'swap',
 })
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -73,8 +79,11 @@ export default function RootLayout({ children }) {
          ${poppins.variable}
          antialiased`}
       >
+       {/* <AOSInitializer />*/}
+        <ClientWrapper/>
         {children}
       </body>
+      
     </html>
   );
 }

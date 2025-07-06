@@ -208,8 +208,8 @@ const WelcomePopup = () => {
   return showWelcome && (
     <div style={{
       position: 'absolute',
-      top: isMobile ? '10px' : '20px',
-      left: isMobile ? '10px' : '20px',
+      top: isMobile ? '10px' : '100px',
+      left: isMobile ? '10px' : '350px',
       width: isMobile ? 'calc(100% - 20px)' : isTablet ? '80%' : '60%',
       maxWidth: '800px',
       height: isMobile ? 'auto' : 'auto',
@@ -289,14 +289,14 @@ const WelcomePopup = () => {
           lineHeight: '1.6',
           overflowY: 'auto',
           maxHeight: isMobile ? 'none' : 'calc(85vh - 100px)',
-          '::-webkit-scrollbar': {
+          '::WebkitScrollbar': {
             width: '6px'
           },
-          '::-webkit-scrollbar-track': {
+          '::WebkitScrollbarTrack': {
             background: '#f1f1f1',
             borderRadius: '3px'
           },
-          '::-webkit-scrollbar-thumb': {
+          '::WebkitScrollbarShumb': {
             background: '#888',
             borderRadius: '3px'
           }

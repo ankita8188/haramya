@@ -53,19 +53,20 @@ export default function BestDestinations() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-10">
-      <h1 className="text-white text-center  text-4xl  poppins mb-2 font-bold">Best Destinations</h1>
-      <p className="text-gray-300 text-center  text-xl poppins not-italic font-normal text-base/6 mb-10">
+    <div className="min-h-screen bg-black text-white px-6 py-10" data-aos="fade-up">
+      <h1 className="text-white text-center  text-4xl  poppins mb-2 font-bold" data-aos="fade-down">Best Destinations</h1>
+      <p className="text-gray-300 text-center  text-xl poppins not-italic font-normal text-base/6 mb-10" data-aos="fade-up" data-aos-delay="100">
       Explore the enchanting landscapes of Bharat, from <br />
       the breathtaking deserts to the stunning coastal shores.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[10rem] gap-6">
-                {destinations.map((dest, idx) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[10rem] gap-6" data-aos="zoom-in-up" data-aos-delay="200">
+        {destinations.map((dest, idx) => (
           <div
             key={idx}
-            className={`rounded-2xl overflow-hidden relative bg-cover bg-center poppins ${dest.rowSpan || "row-span-2"}`}      
+            className={`rounded-2xl overflow-hidden relative bg-cover bg-center poppins ${dest.rowSpan || "row-span-2"}`}
             style={{ backgroundImage: `url(${dest.img})` }}
+            data-aos="fade-up" data-aos-delay={200 + idx * 100}
           >
             <div className="absolute inset-0 bg-black/40 p-4 flex flex-col justify-between">
               <div>
@@ -75,10 +76,8 @@ export default function BestDestinations() {
                 <p className="text-lg text-gray-300 poppins">{dest.subtitle}</p>
               </div>
               <div className="flex items-center gap-2">
-              <div
-                
-                
-                  className="rounded-full w-[3rem] h-[3rem] bg-white  border-2 border-white"
+                <div
+                  className="rounded-full w-[3rem] h-[3rem] bg-white"
                 />
                 <span className="text-md poppins">Shot by<br /> <strong>{dest.author}</strong></span>
               </div>

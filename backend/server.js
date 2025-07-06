@@ -17,8 +17,9 @@ const SALT_KEY = process.env.YOUR_SALT_KEY;
 const SALT_INDEX = process.env.YOUR_SALT_INDEX;
 const PHONEPE_HOST = process.env.PHONEPE_HOST;
 
+
 app.use(cors({
-  origin: [process.env.FRONTEND_URL],
+  origin: process.env.FRONTEND_URL,
   methods: ['GET', 'POST'],
   credentials: true,
 }));
@@ -41,7 +42,7 @@ app.post('/api/payment', async (req, res) => {
     amount: amount * 100,
     redirectUrl: 'https://yourdomain.com/payment-success',
     redirectMode: 'POST',
-    callbackUrl: 'https://yourdomain.com/api/payment/callback',
+    callbackUrl: 'https://localhost:5000/api/payment/callback',
     mobileNumber,
     email,
     paymentInstrument: {
@@ -49,7 +50,7 @@ app.post('/api/payment', async (req, res) => {
       targetApp: 'PHONEPE',
     },
   };
-
+  
   const payloadBase64 = Buffer.from(JSON.stringify(payload)).toString('base64');
   const xVerify = crypto
     .createHash('sha256')

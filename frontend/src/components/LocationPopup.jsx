@@ -30,7 +30,8 @@ const LocationPopup = ({ onClose }) => {
                 locationName: 'LOCATION_NAME' // Replace with actual location name
             });
             
-            window.location.href = `/payment?${paymentParams.toString()}`;
+          //  window.location.href = `/payment?${paymentParams.toString()}`;
+          window.location.href = `/room/v`;
         }
     };
 

@@ -4,8 +4,12 @@ import Welcome from '@/components/Welcome';
 import Cookies from '@/components/Cookies';
 import { useState, useEffect, useRef } from 'react';
 import LocationPopup from '@/components/LocationPopup';
-
+import { useRouter, useSearchParams } from 'next/navigation';
+import Mapnavbar from '@/components/Mapnavbar';
 const MapPage = () => {
+  const router = useRouter();
+  const search= useSearchParams();
+  const [current, setCurrent] = useState(null);
   const [marker, setMarker] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const overlayRef = useRef(null);
@@ -18,18 +22,29 @@ const MapPage = () => {
     setMarker({ x, y });
     setShowPopup(true);
   };
+  const link =["https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d104438.31784976838!2d82.90870686378503!3d25.320894920254027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db76febcf4d%3A0x68131710853ff0b5!2sVaranasi%2C%20Uttar%20Pradesh!5e1!3m2!1sen!2sin!4v1750958716180!5m2!1sen!2sin",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d206100.4727038095!2d75.62574460384303!3d26.885421390788306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C%20Rajasthan!5e1!3m2!1sen!2sin!4v1750958814920!5m2!1sen!2sin",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d891334.5092660676!2d73.3471910483667!3d15.350084489106958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfba106336b741%3A0xeaf887ff62f34092!2sGoa!5e1!3m2!1sen!2sin!4v1750958549948!5m2!1sen!2sin"
+    
+  ];
+  useEffect(() => {
+    const currentValue = search.get('current');
+    setCurrent(currentValue);
+  }, [search]);
 
   // Handle full-screen resize
   useEffect(() => {
     const handleResize = () => {
       setMarker(null); // Reset marker on screen resize
     };
+   
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
+  const l= current===undefined ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30773392.078304354!2d61.028322527582496!3d19.69057626482709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1751271117616!5m2!1sen!2sin" :link[current];
   return (
-    <div
+    <div className="relative flex flex-col w-screen h-screen z-0">
+   {/*} <div
       style={{
         width: '100vw',
         height: '100vh',
@@ -40,8 +55,13 @@ const MapPage = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}
-    >
-      <Welcome />
+    > */}
+    
+      <Mapnavbar className="absolute z-2" />
+      
+  <Welcome className="absolute top-[1000px] left-0 w-full" />
+
+
       <Cookies />
 
       <div
@@ -54,7 +74,7 @@ const MapPage = () => {
       >
         {/* Google Map iframe */}
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.581010906885!2d80.954577814884!3d26.85053568316002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfdcc4f6d52ff%3A0x7fc7eebc617de59c!2sUniversity%20of%20Lucknow!5e0!3m2!1sen!2sin!4v1618921764584!5m2!1sen!2sin"
+          src={l}
           width="100%"
           height="100%"
           style={{ border: 0 }}

@@ -1,7 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Island+Moments&display=swap');
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
-
+@import url('/frontend/public/back2.jpg');
+@import url('/frontend/public/up.png');
+@import url('/frontend/public/upi.png');
+@import url('/frontend/public/specs.png');
+@import url('/frontend/public/yoga.png');
+@import url('/frontend/public/logo.png');
+@import url('/frontend/public/elephant.png');
+@import url('/frontend/public/a.jpg');
+@import url('/frontend//public/palm.jpg');
+@import url('/frontend/public/sky.jpg');
+@import url('/frontend/public/char.jpg');
+@import url('/frontend/public/harmy.png');
+@import url('/frontend/public/pajamas_autoplay.svg');
+@import url('/frontend/public/exp.png');
+@import url('/frontend/public/q.svg');
+@import url('/frontend/public/person.svg');
 
 :root {
   --background: #ffffff;
@@ -28,6 +43,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Poppins', Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 @keyframes fadeInUp {
   0% {
@@ -97,5 +113,11 @@ body {
 
 .mirror-video {
   transform: scaleX(1) !important;/* Flip the video horizontally */
+}
+
+@media (max-width: 640px) {
+  html, body {
+    overflow-x: hidden !important;
+  }
 }
 

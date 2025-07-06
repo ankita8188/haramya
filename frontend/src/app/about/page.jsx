@@ -10,7 +10,7 @@ import Footer from "@/components/Footer"
 const page = () => {
   return (
     <div className='bg-black min-h-screen'>
-      <Hero/>
+      <Hero data-aos="fade-down"/>
       
       <Carousel/>
 
@@ -36,6 +36,7 @@ const page = () => {
                 src="/neom-wTmGtmGQCjQ-unsplash2.png"
                 alt="Rules Of Behaviour"
                 className="w-full h-full object-cover"
+                data-aos="zoom-in-up" data-aos-delay="400"
               />
             </div>
 
@@ -63,7 +64,7 @@ const page = () => {
         </section>
       </div>
   
-      <Footer/>
+      <Footer data-aos="fade-up"/>
     </div>
   )
 }

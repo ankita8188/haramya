@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-
+import Mapnavbar from '@/components/Mapnavbar';
 const ZegoRoomClient = ({ id, role }) => {
   const meetingRef = useRef(null);
   const hasJoinedRef = useRef(false);
@@ -137,6 +137,7 @@ const ZegoRoomClient = ({ id, role }) => {
   
     const userID = randomID();
     const userName = `User_${userID}`;
+    
   
     try {
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
@@ -171,6 +172,7 @@ const ZegoRoomClient = ({ id, role }) => {
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#000' }}>
+      
       <div ref={meetingRef} style={{ width: '100%', height: '90%' }} />
       {role === ZegoUIKitPrebuilt.Audience && (
         <div
@@ -183,6 +185,7 @@ const ZegoRoomClient = ({ id, role }) => {
             padding: '10px',
           }}
         >
+          
           <div style={{ 
             color: isConnected ? '#4CAF50' : '#f44336',
             marginBottom: '10px'

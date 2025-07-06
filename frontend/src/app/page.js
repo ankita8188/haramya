@@ -9,6 +9,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
+import Mapnavbar from "@/components/Mapnavbar";
 
 const images = ["/th (1).jfif", "/mahal.jfif", "/beech.jfif"];
 const imageData = [
@@ -63,7 +64,7 @@ export default function Home() {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 4000); // 4 seconds per slide
-
+    console.log(current);
     return () => clearInterval(interval);
   }, []);
 
@@ -179,7 +180,7 @@ export default function Home() {
   </div>
 
   {/* Right Side - Main Image + Description */}
-  <div className=" border w-[80vw]  flex flex-col items-center lg:px-0 px-4 sm:px-6 mt-[-30px] sm:mt-[-120px] xl:mt-[-230px]">
+  <div className="w-[80vw]  flex flex-col items-center lg:px-0 px-4 sm:px-6 mt-[-30px] sm:mt-[-120px] xl:mt-[-230px]">
     <div className="w-full sm:w-[80vw] xl:w-[60vw]">
       <Image
         src="/elephant.webp"
@@ -340,7 +341,7 @@ export default function Home() {
           </div>
           {/* Button */}
           <div className="mt-14 flex justify-center">
-            <button onClick={() => { router.push("/map") }} className="w-100 bg-gray-800 text-white px-4 py-3 md:px-6 md:py-4 rounded-full text-lg md:text-2xl font-semibold hover:bg-gray-700 hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out">
+            <button onClick={() => { router.push(`/map?current=${current}`) }} className="w-100 bg-gray-800 text-white px-4 py-3 md:px-6 md:py-4 rounded-full text-lg md:text-2xl font-semibold hover:bg-gray-700 hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out">
               Explore Virtually
             </button>
           </div>

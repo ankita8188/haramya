@@ -5,7 +5,10 @@ import { useParams, useRouter } from 'next/navigation';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import { randomID } from './Zegoshared';
 import { FaArrowUp, FaArrowDown, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import DraggableController from './Button';
+import Mapnavbar from './Mapnavbar';
 const AudienceRoom = () => {
+
 const meetingRef = useRef(null);
 const { id } = useParams();
 const router = useRouter();
@@ -28,7 +31,7 @@ const router = useRouter();
   };
 
   const connectWebSocket = () => {
-    const websocket = new WebSocket(`wss${process.env.NEXT_PUBLIC_API_URL}/ws`);
+    const websocket = new WebSocket(`ws${process.env.NEXT_PUBLIC_API_URL}/ws`);
     websocket.onopen = () => {
       setIsConnected(true);
       setWs(websocket);
@@ -42,7 +45,7 @@ const router = useRouter();
     websocket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        console.log(data)
+        
         if (data.type === 'live_status' && data.roomId===id) {
           setInterval(() => {
             const videoElement = document.querySelector('video');
@@ -86,7 +89,7 @@ const router = useRouter();
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appId, serverSecret, String(id), userID, userName
     );
-
+ 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
     zp.joinRoom({
       container: meetingRef.current,
@@ -109,6 +112,7 @@ const router = useRouter();
       position: 'relative',
     
     }}>
+      
       <div ref={meetingRef} style={{position:'relative', width: '100%', height: '100%' }} />
 
       {roomMismatch && (
@@ -138,138 +142,7 @@ const router = useRouter();
       }}>
        
 
-        <div style={{
-  position: 'relative',
-  width: '120px',
-  height: '120px',
-  bottom: '70px', 
-  margin: '50px auto',
-  border:'1px solid white',
-  borderRadius:'50%',
-  backgroundColor:'gray',
-  position:'absolute',
-  zIndex: 100,  
-
-}}>
-  {/* Up Button */}
-  <button
-    onClick={() => handleSendMessage('Up')}
-    disabled={!isConnected}
-    style={{
-      position: 'absolute',
-      top: '10px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      backgroundColor:'gray',
-      border: 'none',
-      borderRadius: '50%',
-      color: '#fff',
-      width: '30px',
-      height: '30px',
-      fontSize: '24px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      cursor: 'pointer',
-      opacity: isConnected ? 1 : 0.5,
-      transition: 'background 0.3s',
-    }}
-    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-  >
-    <FaArrowUp />
-  </button>
-
-  {/* Left Button */}
-  <button
-    onClick={() => handleSendMessage('Left')}
-    disabled={!isConnected}
-    style={{
-      position: 'absolute',
-      top: '50%',
-      left: '10px',
-      transform: 'translateY(-50%)',
-      backgroundColor:'gray',
-      border: 'none',
-      borderRadius: '50%',
-      color: '#fff',
-      width: '30px',
-      height: '30px',
-      fontSize: '24px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      cursor: 'pointer',
-      opacity: isConnected ? 1 : 0.5,
-      transition: 'background 0.3s',
-    }}
-    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-  >
-    <FaArrowLeft />
-  </button>
-
-  {/* Right Button */}
-  <button
-    onClick={() => handleSendMessage('Right')}
-    disabled={!isConnected}
-    style={{
-      position: 'absolute',
-      top: '50%',
-      right: '10px',
-      transform: 'translateY(-50%)',
-      backgroundColor:'gray',
-      border: 'none',
-      borderRadius: '50%',
-      color: '#fff',
-      width: '30px',
-      height: '30px',
-      fontSize: '24px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      cursor: 'pointer',
-      opacity: isConnected ? 1 : 0.5,
-      transition: 'background 0.3s',
-    }}
-    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-  >
-    <FaArrowRight />
-  </button>
-
-  {/* Down Button */}
-  <button
-    onClick={() => handleSendMessage('Down')}
-    disabled={!isConnected}
-    style={{
-      position: 'absolute',
-      bottom: '10px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      backgroundColor:'gray',
-      border: 'none',
-      borderRadius: '50%',
-      color: '#fff',
-      width: '30px',
-      height: '30px',
-      fontSize: '24px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      cursor: 'pointer',
-      opacity: isConnected ? 1 : 0.5,
-      transition: 'background 0.3s',
-    }}
-    onMouseOver={(e) => e.currentTarget.style.background = '#1565c0'}
-    onMouseOut={(e) => e.currentTarget.style.background = '#1e88e5'}
-  >
-    <FaArrowDown />
-  </button>
-
-
-</div>
-
+<DraggableController/>
       </div>
     </div>
   );
